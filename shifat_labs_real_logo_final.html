@@ -1,0 +1,373 @@
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap');
+body{font-family:'DM Sans',sans-serif;background:#080808;color:#f0f0f0;overflow-x:hidden}
+
+/* ===== GRADIENT TEXT ===== */
+.g-text{background:linear-gradient(135deg,#ff6a2a 0%,#e53030 30%,#ff9a3c 55%,#fff 70%,#e53030 85%,#ff6a2a 100%);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 5s ease infinite}
+.g-cool{background:linear-gradient(135deg,#e53030 0%,#ff6a2a 25%,#ffe0b2 50%,#ff6a2a 75%,#e53030 100%);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 6s ease infinite}
+.g-shine{background:linear-gradient(105deg,#b91c1c 0%,#ef4444 20%,#fbbf24 40%,#fff 50%,#fbbf24 60%,#ef4444 80%,#b91c1c 100%);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 4s linear infinite}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes shine{0%{background-position:200% center}100%{background-position:-200% center}}
+
+/* ===== BLOBS ===== */
+.blob{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.b1{width:600px;height:600px;background:radial-gradient(circle,rgba(220,30,30,0.55),transparent 70%);top:-180px;left:-80px;animation:drift 9s ease-in-out infinite alternate}
+.b2{width:400px;height:400px;background:radial-gradient(circle,rgba(180,10,10,0.35),transparent 70%);top:30%;right:-60px;animation:drift 11s 2s ease-in-out infinite alternate}
+.b3{width:300px;height:300px;background:radial-gradient(circle,rgba(255,80,20,0.2),transparent 70%);bottom:10%;left:20%;animation:drift 13s 5s ease-in-out infinite alternate}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,40px) scale(1.12)}}
+.grain{position:absolute;inset:0;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+
+/* ===== NAV ===== */
+nav{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;border-bottom:1px solid rgba(255,255,255,0.06)}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo-img{width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(229,48,48,0.5));transition:filter 0.3s}
+.nav-logo-img:hover{filter:drop-shadow(0 0 16px rgba(229,48,48,0.8))}
+.nav-pill{display:flex;align-items:center;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:4px}
+.nav-pill span{padding:6px 18px;font-size:0.78rem;color:rgba(255,255,255,0.5);cursor:pointer;border-radius:50px;transition:all 0.2s;white-space:nowrap}
+.nav-pill span.active{background:#e53030;color:#fff}
+.btn-red{background:#e53030;color:#fff;border:none;border-radius:50px;padding:8px 20px;font-size:0.8rem;font-weight:500;cursor:pointer;transition:opacity 0.2s,box-shadow 0.2s}
+.btn-red:hover{opacity:0.88;box-shadow:0 0 24px rgba(229,48,48,0.5)}
+.btn-out{background:transparent;color:#f0f0f0;border:1px solid rgba(255,255,255,0.2);border-radius:50px;padding:10px 24px;font-size:0.85rem;cursor:pointer;transition:border-color 0.2s}
+.btn-out:hover{border-color:rgba(255,255,255,0.5)}
+
+/* ===== HERO ===== */
+.hero{position:relative;min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:3rem 3rem 2rem;gap:2rem;overflow:hidden}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);border-radius:50px;padding:5px 14px;margin-bottom:1.8rem}
+.bdot{width:5px;height:5px;border-radius:50%;background:#e53030;animation:blink 2s infinite;display:inline-block}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+h1.htitle{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,5vw,4.8rem);font-weight:800;line-height:1.0;letter-spacing:-2px;margin-bottom:1.2rem}
+.hsub{font-size:0.9rem;color:rgba(255,255,255,0.45);line-height:1.7;max-width:380px;margin-bottom:2.2rem}
+.hbtns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:2.5rem}
+.stats-row{display:flex;gap:2rem}
+.stt label{font-size:0.7rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:2px}
+.stt strong{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800}
+
+/* ===== HERO RIGHT ===== */
+.blob-vis{position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:320px;height:320px;border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(255,80,30,0.9),rgba(180,10,10,0.6) 40%,rgba(80,0,0,0.3) 70%,transparent);filter:blur(2px);animation:jelly 7s ease-in-out infinite;z-index:1}
+.blob-ring{position:absolute;right:-90px;top:50%;transform:translateY(-50%);width:390px;height:390px;border-radius:50%;border:1px solid rgba(229,48,48,0.15);animation:jelly 7s 1s ease-in-out infinite}
+@keyframes jelly{0%,100%{transform:translateY(-50%) scale(1) rotate(0deg)}50%{transform:translateY(-55%) scale(1.06) rotate(4deg)}}
+
+/* Real logo watermark in hero */
+.hero-logo-wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;opacity:0.08;pointer-events:none;width:260px;height:260px;object-fit:contain}
+
+.scard{background:rgba(14,14,14,0.88);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:14px 16px;backdrop-filter:blur(20px)}
+.sc-n{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;line-height:1}
+.sc-s{font-size:0.7rem;color:rgba(255,255,255,0.35);margin-top:2px}
+.sc-pill{font-size:0.62rem;color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:4px;padding:3px 8px}
+.soc{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;text-decoration:none}
+.soc:hover{border-color:rgba(229,48,48,0.5);background:rgba(229,48,48,0.1)}
+.soc svg{width:13px;height:13px;fill:rgba(255,255,255,0.5);transition:fill 0.2s}
+.soc:hover svg{fill:rgba(255,255,255,0.9)}
+
+/* ===== PORTFOLIO ===== */
+.portfolio{padding:4rem 3rem;position:relative;z-index:2}
+.stag{display:inline-block;font-size:0.68rem;background:#e53030;color:#fff;border-radius:4px;padding:3px 10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.8rem}
+.sec-ttl{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:2rem}
+.wgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.wcard{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);background:rgba(14,14,14,0.9);transition:transform 0.3s,border-color 0.3s;cursor:pointer;text-decoration:none;display:block}
+.wcard:hover{transform:translateY(-5px);border-color:rgba(229,48,48,0.3)}
+.wthumb{width:100%;height:155px;object-fit:cover;display:block;background:#111}
+.wthumb-ph{width:100%;height:155px;background:linear-gradient(135deg,#1a0a0a,#2d0f0f);display:none;align-items:center;justify-content:center;font-size:2rem}
+.winfo{padding:12px 14px}
+.wtitle{font-family:'Syne',sans-serif;font-size:0.83rem;font-weight:700;line-height:1.3;margin-bottom:4px;color:#f0f0f0}
+.wcat{font-size:0.7rem;color:rgba(255,255,255,0.35)}
+
+/* ===== SERVICES ===== */
+.services{padding:4rem 3rem;position:relative;overflow:hidden}
+.srvlist{border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;margin-top:2rem;position:relative;z-index:2}
+.si{border-bottom:1px solid rgba(255,255,255,0.06);padding:1.4rem 1.8rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background 0.2s}
+.si:last-child{border-bottom:none}
+.si:hover,.si.open{background:rgba(229,48,48,0.04)}
+.si-num{font-size:0.68rem;color:rgba(229,48,48,0.6);font-weight:500;min-width:24px}
+.si-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700}
+.si-pill{font-size:0.62rem;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:3px 10px}
+.si-arr{width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,0.4);flex-shrink:0}
+
+/* ===== ABOUT ===== */
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;padding:4rem 3rem;align-items:start;position:relative;z-index:2}
+.bigcopy{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;line-height:1.2;letter-spacing:-1px}
+.icards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.icard{background:rgba(14,14,14,0.9);border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:1.4rem;backdrop-filter:blur(16px)}
+.icard.rc{border-color:rgba(229,48,48,0.2);background:rgba(229,48,48,0.04)}
+.ilbl{font-size:0.68rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:0.5rem}
+.ibig{font-family:'Syne',sans-serif;font-size:2.6rem;font-weight:800;line-height:1;margin-bottom:0.3rem}
+.trow{display:flex;align-items:center;margin-top:10px;gap:10px}
+.tav{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#c0392b,#e74c3c);flex-shrink:0}
+
+/* ===== CTA ===== */
+.cta{padding:4rem 3rem;text-align:center;position:relative;overflow:hidden}
+.ctitle{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:0.8rem}
+.cloc{display:inline-flex;align-items:center;gap:6px;font-size:0.75rem;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:5px 14px;margin-bottom:1.5rem}
+.ldot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:blink 2s infinite;display:inline-block}
+
+/* ===== FOOTER ===== */
+footer{border-top:1px solid rgba(255,255,255,0.06);padding:1.8rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:relative;z-index:2}
+.fsoc{display:flex;align-items:center;gap:8px}
+.fsoc-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:50px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);font-size:0.75rem;color:rgba(255,255,255,0.5);text-decoration:none;transition:all 0.2s}
+.fsoc-btn:hover{border-color:rgba(229,48,48,0.4);background:rgba(229,48,48,0.08);color:#fff}
+.fsoc-btn svg{width:13px;height:13px;fill:currentColor;flex-shrink:0}
+</style>
+
+<div id="app" style="background:#080808;min-height:100vh;position:relative">
+
+<!-- BG -->
+<div style="position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="grain"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <img id="navLogo" class="nav-logo-img" src="" alt="Shifat Labs Logo"/>
+    <span class="g-shine" style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem">Shifat Labs</span>
+  </div>
+  <div class="nav-pill">
+    <span class="active">Home</span><span>Services</span><span>Works</span><span>About</span><span>Contact</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.12);border-radius:50px;padding:6px 16px;cursor:pointer">Menu ✕</div>
+    <button class="btn-red">Let's Talk</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div style="position:relative;z-index:2">
+    <div class="hero-badge"><span class="bdot"></span> Design-Driven Studio</div>
+    <h1 class="htitle">
+      <span class="g-text">Your Visual</span><br>
+      <span class="g-shine">Identity</span><br>
+      <span class="g-cool">On Demand</span>
+    </h1>
+    <p class="hsub">Thumbnail design, brand identity, UI/UX — from Dhaka to the world. Bold visuals, zero compromise.</p>
+    <div class="hbtns">
+      <button class="btn-out">Explore Work</button>
+      <button class="btn-red">View Pricing Plans</button>
+    </div>
+    <div class="stats-row">
+      <div class="stt"><label>Happy Clients</label><strong class="g-text">3M+</strong></div>
+      <div class="stt"><label>ROI Improvement</label><strong class="g-cool">95%</strong></div>
+      <div class="stt"><label>Client Retention</label><strong class="g-shine">88%</strong></div>
+    </div>
+  </div>
+
+  <div style="position:relative;height:460px;width:100%">
+    <div class="blob-vis"></div>
+    <div class="blob-ring"></div>
+    <!-- Real logo watermark -->
+    <img id="heroWm" class="hero-logo-wm" src="" alt=""/>
+
+    <div style="position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:5;display:flex;flex-direction:column;gap:10px">
+      <div class="scard" style="width:185px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:0.62rem;color:rgba(255,255,255,0.3)">Shifat Labs</span>
+          <span style="font-size:0.62rem;color:rgba(255,255,255,0.25)">01/04</span>
+        </div>
+        <div class="sc-n g-text">230+</div>
+        <div class="sc-s">Projects successfully launched</div>
+      </div>
+      <div class="scard" style="width:185px">
+        <div class="sc-n g-cool" style="font-size:1.7rem;margin-bottom:4px">400+</div>
+        <div class="sc-s" style="margin-bottom:10px">Trusted Partners</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px">
+          <span class="sc-pill">Behance</span><span class="sc-pill">Figma</span>
+          <span class="sc-pill">Dribbble</span><span class="sc-pill">Adobe</span>
+        </div>
+        <button class="btn-red" style="width:100%;font-size:0.72rem;padding:7px">Book a call →</button>
+      </div>
+    </div>
+
+    <!-- Social strip -->
+    <div style="position:absolute;right:-4px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;z-index:6;padding-right:0.4rem">
+      <div style="font-size:0.52rem;color:rgba(255,255,255,0.18);letter-spacing:2px;writing-mode:vertical-rl;text-transform:uppercase;margin-bottom:4px">Social</div>
+      <a href="https://www.facebook.com/shifat.labs/" target="_blank" class="soc" title="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/shifatlabs/" target="_blank" class="soc" title="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="rgba(255,255,255,0.5)" stroke="none"/></svg>
+      </a>
+      <a href="https://www.behance.net/shifatlabs" target="_blank" class="soc" title="Behance">
+        <svg viewBox="0 0 24 24"><path d="M7.5 11.5c1.38 0 2.5-1.12 2.5-2.5S8.88 6.5 7.5 6.5H3v9h4.8c1.49 0 2.7-1.21 2.7-2.7 0-1.1-.67-2.05-1.63-2.48A2.5 2.5 0 0 0 7.5 11.5zM5 8h2.5a1 1 0 0 1 0 2H5V8zm2.8 5.5H5v-2h2.8a1 1 0 0 1 0 2zM14.5 8h5v1h-5zM17 10c-2.21 0-4 1.79-4 4s1.79 4 4 4c1.55 0 2.89-.88 3.56-2.17l-1.6-.92A2 2 0 0 1 17 16a2 2 0 0 1-1.93-1.5H21c.03-.16.05-.33.05-.5 0-2.21-1.79-4-4.05-4zm-1.93 3A2 2 0 0 1 17 11.5a2 2 0 0 1 1.93 1.5h-3.86z"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem">
+    <div>
+      <div class="stag">Portfolio</div>
+      <h2 class="sec-ttl"><span class="g-text">Selected</span> <span class="g-shine">Works</span></h2>
+    </div>
+    <a href="https://www.behance.net/shifatlabs" target="_blank" style="font-size:0.8rem;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:6px 16px;text-decoration:none;transition:border-color 0.2s" onmouseover="this.style.borderColor='rgba(229,48,48,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">View all on Behance ↗</a>
+  </div>
+  <div class="wgrid" id="wgrid"></div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden"><div class="blob" style="width:350px;height:350px;background:radial-gradient(circle,rgba(229,48,48,0.2),transparent 70%);top:-80px;left:-80px"></div></div>
+  <div style="position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-end">
+    <div>
+      <div class="stag">Services</div>
+      <h2 class="sec-ttl"><span class="g-text">End-to-End</span><br><span class="g-cool">Design Services</span></h2>
+    </div>
+    <p style="font-size:0.85rem;color:rgba(255,255,255,0.4);max-width:260px;line-height:1.6">From idea to delivery — strategy, craft, and precision in every pixel.</p>
+  </div>
+  <div class="srvlist">
+    <div class="si open"><div style="display:flex;align-items:center;gap:16px"><span class="si-num">01</span><div><div class="si-name g-shine">Thumbnail Design</div><div style="display:flex;gap:6px;margin-top:5px"><span class="si-pill">YouTube</span><span class="si-pill">Documentary</span><span class="si-pill">Storytelling</span></div></div></div><div class="si-arr" style="border-color:rgba(229,48,48,0.3);color:#e53030">↗</div></div>
+    <div class="si"><div style="display:flex;align-items:center;gap:16px"><span class="si-num">02</span><div><div class="si-name g-text">Brand Identity</div><div style="display:flex;gap:6px;margin-top:5px"><span class="si-pill">Logo</span><span class="si-pill">Color system</span><span class="si-pill">Guidelines</span></div></div></div><div class="si-arr">→</div></div>
+    <div class="si"><div style="display:flex;align-items:center;gap:16px"><span class="si-num">03</span><div><div class="si-name g-cool">UI / UX Design</div><div style="display:flex;gap:6px;margin-top:5px"><span class="si-pill">Web</span><span class="si-pill">Mobile</span><span class="si-pill">Prototyping</span></div></div></div><div class="si-arr">→</div></div>
+    <div class="si"><div style="display:flex;align-items:center;gap:16px"><span class="si-num">04</span><div><div class="si-name g-shine">Social Media & Poster</div><div style="display:flex;gap:6px;margin-top:5px"><span class="si-pill">Instagram</span><span class="si-pill">Facebook</span><span class="si-pill">Print</span></div></div></div><div class="si-arr">→</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section style="position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;pointer-events:none"><div class="blob" style="width:350px;height:350px;background:radial-gradient(circle,rgba(229,48,48,0.2),transparent 70%);top:-30px;right:-60px"></div></div>
+  <div class="agrid">
+    <div>
+      <div style="display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:6px 14px;margin-bottom:1.5rem;cursor:pointer">↗ About Us</div>
+      <p class="bigcopy">We <span class="g-shine">design</span> and deliver creative solutions with people at the core, ensuring every <span class="g-text">brand enhances</span> real user experiences.</p>
+    </div>
+    <div class="icards">
+      <div class="icard" style="grid-column:1/-1">
+        <div class="ilbl">Worldwide availability</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:10px">Based in <span class="g-text">Dhaka, Bangladesh</span></div>
+        <button class="btn-red" style="font-size:0.78rem;padding:8px 20px">Start a Project →</button>
+      </div>
+      <div class="icard rc">
+        <div class="ilbl">Happy Clients</div>
+        <div class="ibig g-text">120+</div>
+        <div style="color:#e53030;font-size:13px;letter-spacing:2px;margin-bottom:6px">★★★★★</div>
+        <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);line-height:1.5">Idea to production in 2–6 weeks.</div>
+        <div class="trow"><div class="tav"></div><div><div style="font-size:0.73rem;font-weight:500">"Good design feels obvious."</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.4)">Shifat Hossain · Design Lead</div></div></div>
+      </div>
+      <div class="icard">
+        <div class="ilbl">Experience</div>
+        <div class="ibig g-cool">5+</div>
+        <div style="font-size:0.75rem;color:rgba(255,255,255,0.4)">Visual Artist · Ekattor TV</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden"><div class="blob" style="width:400px;height:400px;background:radial-gradient(circle,rgba(229,48,48,0.2),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)"></div></div>
+  <div style="max-width:620px;margin:0 auto;position:relative;z-index:2">
+    <div class="cloc"><span class="ldot"></span> Available for worldwide projects</div>
+    <h2 class="ctitle">Let's Create<br><span class="g-shine">Something Bold</span></h2>
+    <p style="font-size:0.88rem;color:rgba(255,255,255,0.4);margin-bottom:2rem;line-height:1.7">Have a vision? Let's build a brand that speaks before you do.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <button class="btn-red" style="font-size:0.9rem;padding:12px 28px">Start a Project →</button>
+      <button class="btn-out" style="font-size:0.9rem;padding:12px 28px">View Portfolio</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="display:flex;align-items:center;gap:10px">
+    <img id="footLogo" src="" alt="Shifat Labs" style="width:28px;height:28px;object-fit:contain;filter:drop-shadow(0 0 6px rgba(229,48,48,0.4))"/>
+    <span class="g-shine" style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem">Shifat Labs</span>
+  </div>
+  <div class="fsoc">
+    <a href="https://www.facebook.com/shifat.labs/" target="_blank" class="fsoc-btn"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Facebook</a>
+    <a href="https://www.instagram.com/shifatlabs/" target="_blank" class="fsoc-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg>Instagram</a>
+    <a href="https://www.behance.net/shifatlabs" target="_blank" class="fsoc-btn"><svg viewBox="0 0 24 24"><path d="M7.5 11.5c1.38 0 2.5-1.12 2.5-2.5S8.88 6.5 7.5 6.5H3v9h4.8c1.49 0 2.7-1.21 2.7-2.7 0-1.1-.67-2.05-1.63-2.48A2.5 2.5 0 0 0 7.5 11.5zM5 8h2.5a1 1 0 0 1 0 2H5V8zm2.8 5.5H5v-2h2.8a1 1 0 0 1 0 2zM14.5 8h5v1h-5zM17 10c-2.21 0-4 1.79-4 4s1.79 4 4 4c1.55 0 2.89-.88 3.56-2.17l-1.6-.92A2 2 0 0 1 17 16a2 2 0 0 1-1.93-1.5H21c.03-.16.05-.33.05-.5 0-2.21-1.79-4-4.05-4zm-1.93 3A2 2 0 0 1 17 11.5a2 2 0 0 1 1.93 1.5h-3.86z"/></svg>Behance</a>
+  </div>
+  <div style="font-size:0.75rem;color:rgba(255,255,255,0.2)">© 2024 Shifat Labs · Dhaka, Bangladesh</div>
+</footer>
+
+</div>
+
+<script>
+// ===== REAL LOGO BASE64 =====
+const LOGO_B64 = '/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAWgBaADASIAAhEBAxEB/8QAHQABAAMBAQADAQAAAAAAAAAAAAECAwQFBwgJBv/EAE0QAQEAAgEDAgQEBAMEBAsFCQACAxIEBSIyBhMHMUJSAQgRYhQjM3JDgrQVOFOSFiQ0oiElN0FWdJSyxNLTNUZVc5MXRGGBhJWzwsP/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A+o';
+
+const logoSrc = 'data:image/jpeg;base64,' + LOGO_B64;
+// Use the actual uploaded file path for full image
+const fullLogoSrc = '/mnt/user-data/uploads/1777736074321_image.png';
+
+// Set logos via fetch workaround — use blob URL
+async function loadLogo() {
+  try {
+    const resp = await fetch('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==');
+    // Fallback: set src directly from uploads path
+  } catch(e) {}
+}
+
+// Direct path set — works in Claude environment
+['navLogo','heroWm','footLogo'].forEach(id => {
+  const el = document.getElementById(id);
+  if(el) el.src = '/mnt/user-data/uploads/1777736074321_image.png';
+});
+
+// ===== REAL BEHANCE PROJECTS =====
+const projects = [
+  {title:"Minimalistic Thumbnail Design",cat:"Thumbnail Design",img:"https://mir-s3-cdn-cf.behance.net/projects/404/4b609e240435583.Y3JvcCwxNDQwLDExMjYsMCww.png",url:"https://www.behance.net/gallery/240435583/MINIMALISTIC-THUMBNAIL-DEISGN"},
+  {title:"Storytelling & Documentary Thumbnail",cat:"Thumbnail Design",img:"https://mir-s3-cdn-cf.behance.net/projects/404/5c13ac240811549.Y3JvcCwxODQxLDE0NDAsMzYwLDA.png",url:"https://www.behance.net/gallery/240811549/STORYTELLLING-DOCUMENTARY-THUMBNAIL-DESIGN"},
+  {title:"The Hidden Truth — Mysterious Thumbnail",cat:"Thumbnail Design",img:"https://mir-s3-cdn-cf.behance.net/projects/404/4cfdde221731753.Y3JvcCwxNDQwLDExMjYsMCw4MQ.png",url:"https://www.behance.net/gallery/221731753/The-Hidden-Truth-Mysterious-Thumbnail-Design"},
+  {title:"Beyond Reality",cat:"Creative Design",img:"https://mir-s3-cdn-cf.behance.net/projects/404/a59983221730437.Y3JvcCwxNDQwLDExMjYsMCww.png",url:"https://www.behance.net/gallery/221730437/Beyond-Reality"},
+  {title:"Documentary Thumbnail Design",cat:"Thumbnail Design",img:"https://mir-s3-cdn-cf.behance.net/projects/404/7be245217639303.Y3JvcCwxODQxLDE0NDAsMzYwLDA.png",url:"https://www.behance.net/gallery/217639303/Documentary-Thumbnail-Design"},
+  {title:"Electrical Accessories Poster",cat:"Social Media Poster",img:"https://mir-s3-cdn-cf.behance.net/projects/404/368b82209598111.Y3JvcCwxMDgwLDg0NCwwLDExNw.jpg",url:"https://www.behance.net/gallery/209598111/Electrical-Accessories-Poster-Social-Media-Poster"}
+];
+const grid = document.getElementById('wgrid');
+projects.forEach(p => {
+  const a = document.createElement('a');
+  a.className = 'wcard'; a.href = p.url; a.target = '_blank';
+  a.innerHTML = `<img class="wthumb" src="${p.img}" alt="${p.title}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" loading="lazy"/><div class="wthumb-ph">🎨</div><div class="winfo"><div class="wtitle">${p.title}</div><div class="wcat">${p.cat}</div></div>`;
+  grid.appendChild(a);
+});
+
+// ===== MOUSE → GRADIENT DIRECTION =====
+document.addEventListener('mousemove', e => {
+  const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+  const angle = Math.atan2(e.clientY - cy, e.clientX - cx) * (180 / Math.PI);
+  const a2 = angle + 45;
+
+  document.querySelectorAll('.g-text').forEach(el => {
+    el.style.backgroundImage = `linear-gradient(${angle}deg,#ff6a2a 0%,#e53030 30%,#ff9a3c 55%,#fff 70%,#e53030 85%,#ff6a2a 100%)`;
+    el.style.backgroundSize = '300% 300%';
+    el.style.webkitBackgroundClip = 'text';
+    el.style.webkitTextFillColor = 'transparent';
+    el.style.backgroundClip = 'text';
+  });
+  document.querySelectorAll('.g-cool').forEach(el => {
+    el.style.backgroundImage = `linear-gradient(${a2}deg,#e53030 0%,#ff6a2a 25%,#ffe0b2 50%,#ff6a2a 75%,#e53030 100%)`;
+    el.style.backgroundSize = '300% 300%';
+    el.style.webkitBackgroundClip = 'text';
+    el.style.webkitTextFillColor = 'transparent';
+    el.style.backgroundClip = 'text';
+  });
+});
+
+// ===== SCROLL → SHINE SPEED =====
+let lastY = 0;
+window.addEventListener('scroll', () => {
+  const speed = Math.max(0.8, 4 - Math.abs(window.scrollY - lastY) * 0.06);
+  document.querySelectorAll('.g-shine').forEach(el => el.style.animationDuration = speed + 's');
+  lastY = window.scrollY;
+});
+
+// ===== NAV PILL =====
+document.querySelectorAll('.nav-pill span').forEach(s => {
+  s.addEventListener('click', function() {
+    document.querySelectorAll('.nav-pill span').forEach(x => x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// ===== SERVICE ACCORDION =====
+document.querySelectorAll('.si').forEach(item => {
+  item.addEventListener('click', function() {
+    document.querySelectorAll('.si').forEach(i => i.classList.remove('open'));
+    this.classList.add('open');
+  });
+});
+</script>
