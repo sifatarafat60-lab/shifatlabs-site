@@ -100,8 +100,8 @@ nav{
 }
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:none}
 .nav-logo img{width:34px;height:34px;object-fit:contain;border-radius:50%;}
-.nav-brand{font-family:var(--serif);font-size:1rem;font-weight:400;color:var(--white)}
-.nav-brand span{color:var(--white)}
+.nav-brand{font-family:var(--clash);font-size:1.2rem;font-weight:600;color:var(--white)}
+.nav-brand span{color:var(--white);font-family: var(--serif);font-style: italic;margin-left: 1px;letter-spacing: 0px;font-weight: 500;}
 .nav-links{display:flex;align-items:center;gap:32px}
 .nav-links a{font-size:0.8rem;color:rgba(245,240,238,0.38);text-decoration:none;transition:color .2s;letter-spacing:.5px;cursor:none}
 .nav-links a:hover{color:var(--white)}
@@ -650,8 +650,224 @@ footer{
   </div>
 </div>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+    /* ═══ THUMBNAIL SECTION STYLES ═══ */
+    #thumbnails {
+        background: rgba(139, 26, 42, 0.01);
+        border-top: 1px solid rgba(139, 26, 42, 0.08);
+        padding: 100px 0;
+        font-family: var(--clash, sans-serif);
+    }
 
-<!-- MOTION GRAPHICS -->
+    .thumb-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 25px;
+    }
+
+    .thumb-desc {
+        color: rgba(255, 255, 255, 0.38);
+        font-size: 0.95rem;
+        max-width: 500px;
+        margin-bottom: 3.5rem;
+        line-height: 1.6;
+    }
+
+    .thumb-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+    }
+
+    .thumb-card {
+        position: relative;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    /* Force 16:9 Aspect Ratio */
+    .thumb-media {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%; /* 16:9 Ratio */
+        background: #000;
+        overflow: hidden;
+    }
+
+    .thumb-media img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Ensures full image is visible */
+        transition: transform 0.8s ease;
+    }
+
+    /* Hover Effects */
+    .thumb-card:hover {
+        border-color: rgba(139, 26, 42, 0.4);
+        transform: translateY(-5px);
+    }
+
+    .thumb-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .thumb-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(13, 13, 15, 0.7);
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .thumb-card:hover .thumb-overlay {
+        opacity: 1;
+    }
+
+    .btn-preview {
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 14px 28px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50px;
+        background: #8b1a2a; /* Wine Red */
+        box-shadow: 0 10px 20px rgba(139, 26, 42, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 850px) {
+        .thumb-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+</head>
+<body>
+
+<section id="thumbnails">
+    <div class="thumb-container">
+        <div class="section-in">
+            <div class="stag">Graphics Design</div>
+            <h2 class="sec-title">Premium <em>Thumbnails</em></h2>
+            <p class="thumb-desc">
+                High-performance visual hooks designed to maximize click-through rates and channel growth.
+            </p>
+            
+            <div class="thumb-grid">
+                <!-- Thumbnail 1 -->
+                <div class="thumb-card glass">
+                    <div class="thumb-media">
+                        <img src="https://lh3.googleusercontent.com/d/1zPYHA3hBhHcbQKh1POrDDA8J0SvOGS8t" alt="Strategy Thumbnail">
+                        <div class="thumb-overlay">
+                            <span class="btn-preview">Full Preview</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thumbnail 2 -->
+                <div class="thumb-card glass">
+                    <div class="thumb-media">
+                        <img src="https://lh3.googleusercontent.com/d/1c-t9L_nBz1g1pt5Vn-hxhxfQ3MxlNPHJ" alt="Documentary Thumbnail">
+                        <div class="thumb-overlay">
+                            <span class="btn-preview">Full Preview</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thumbnail 3 -->
+                <div class="thumb-card glass">
+                    <div class="thumb-media">
+                        <img src="https://lh3.googleusercontent.com/d/158toWne0ijKJMrYpPZKLWdquFSpwt7xO" alt="Viral Thumbnail">
+                        <div class="thumb-overlay">
+                            <span class="btn-preview">Full Preview</span>
+                        </div>
+                    </div>
+                </div>
+
+<!-- Thumbnail 4 -->
+<div class="thumb-card glass">
+    <div class="thumb-media">
+        <img src="https://lh3.googleusercontent.com/d/16vtXeI_6tvfwwqjG2SCz8AamR9YMbn1n" alt="Thumbnail Design 4">
+        <div class="thumb-overlay">
+            <span class="btn-preview">Full Preview</span>
+        </div>
+    </div>
+</div>
+
+<!-- Thumbnail 5 -->
+<div class="thumb-card glass">
+    <div class="thumb-media">
+        <img src="https://lh3.googleusercontent.com/d/13T82aTzzEcfazvZn4q6yd0rE5h3ZnMBi" alt="Thumbnail Design 5">
+        <div class="thumb-overlay">
+            <span class="btn-preview">Full Preview</span>
+        </div>
+    </div>
+</div>
+
+<!-- Thumbnail 6 -->
+<div class="thumb-card glass">
+    <div class="thumb-media">
+        <img src="https://lh3.googleusercontent.com/d/1MbvJcFhJV8gTSl_K0EzwYKPfuSsuLjsX" alt="Thumbnail Design 7">
+        <div class="thumb-overlay">
+            <span class="btn-preview">Full Preview</span>
+        </div>
+    </div>
+</div>
+<!-- Thumbnail 7 -->
+<div class="thumb-card glass">
+    <div class="thumb-media">
+        <img src="https://lh3.googleusercontent.com/d/1lFX_mql4wFKHWp7Rb4IX6MWS5WLXdIjA" alt="Thumbnail Design 8">
+        <div class="thumb-overlay">
+            <span class="btn-preview">Full Preview</span>
+        </div>
+    </div>
+</div>
+<!-- Thumbnail 8 -->
+<div class="thumb-card glass">
+    <div class="thumb-media">
+        <img src="https://lh3.googleusercontent.com/d/1lv2Ar0tWiSyND2UglK2H3Fkh6c5gxom6" alt="Thumbnail Design 10">
+        <div class="thumb-overlay">
+            <span class="btn-preview">Full Preview</span>
+        </div>
+    </div>
+</div>
+<!-- Thumbnail 9 -->
+<div class="thumb-card glass">
+    <div class="thumb-media">
+        <img src="https://lh3.googleusercontent.com/d/1lD8Q4xwNnyWhfl6YK43SeRnButbCNt0q" alt="Thumbnail Design 9">
+        <div class="thumb-overlay">
+            <span class="btn-preview">Full Preview</span>
+        </div>
+    </div>
+</div>
+
+                <!-- Coming Soon Placeholder -->
+                <div class="thumb-card glass" style="display: flex; align-items: center; justify-content: center; min-height: 200px; opacity: 0.5;">
+                    <span style="font-size: 1rem; letter-spacing: 3px; color: rgba(255,255,255,0.2);">NEXT PROJECT...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
+</div><!-- MOTION GRAPHICS -->
 <div id="motion" style="background:rgba(139,26,42,0.018);border-top:1px solid rgba(139,26,42,0.07);border-bottom:1px solid rgba(139,26,42,0.07)">
   <div style="max-width:1200px;margin:0 auto">
     <div class="section">
@@ -726,40 +942,18 @@ footer{
     </div>
   </div>
 </div>
+<!-- CLIENTS HEADLINE & BAR -->
+<div class="clients-container" style="margin-top: 100px; padding-bottom: 40px; text-align: center;">
+     <!-- Headline -->
+<h2 style="font-family: var(--clash); font-size: 1.5rem; color: #fff; margin-bottom: 10px; letter-spacing: 1px;">
+    Trusted by <span style="font-family: 'display', serif; font-style: italic; text-transform: none; opacity: 1;">Industry</span>
+</h2>
+<p style="color: rgba(255,255,255,0.3); font-size: 0.85rem; margin-bottom: 40px;">
+    Collaborating with top-tier broadcasting networks and creators.
+</p>
 
-<!-- PROCESS -->
-<div style="max-width:1200px;margin:0 auto">
-  <div class="section">
-    <div class="section-in">
-      <div class="stag">Process</div>
-      <h2 class="sec-title">How It <em>Works</em></h2>
-      <div class="shimmer"></div>
-      <div class="proc-grid">
-        <div class="glass proc-card">
-          <div class="p-num">01</div>
-          <div class="p-title">Discovery Call</div>
-          <div class="p-desc">We talk about your vision, audience, and goals to align on direction.</div>
-        </div>
-        <div class="glass proc-card">
-          <div class="p-num">02</div>
-          <div class="p-title">Concept Draft</div>
-          <div class="p-desc">Initial concepts crafted within 24 hours for your feedback.</div>
-        </div>
-        <div class="glass proc-card">
-          <div class="p-num">03</div>
-          <div class="p-title">Refinement</div>
-          <div class="p-desc">2 rounds of revisions until it's exactly right.</div>
-        </div>
-        <div class="glass proc-card">
-          <div class="p-num">04</div>
-          <div class="p-title">Final Delivery</div>
-          <div class="p-desc">High-res files delivered, ready to publish immediately.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
+  
 <!-- ABOUT -->
 <div id="about" style="background:rgba(245,240,238,0.006);border-top:1px solid rgba(139,26,42,0.1)">
   <div style="max-width:1200px;margin:0 auto">
