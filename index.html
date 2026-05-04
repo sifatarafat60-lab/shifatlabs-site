@@ -676,6 +676,9 @@ footer{
     <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
     Book a Call
   </a>
+  <div class="hamburger" id="hamburger" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -1058,14 +1061,199 @@ footer{
 
   #lightbox-overlay.active img { transform: scale(1); }
 
-  /* Responsive Fix */
-  @media (max-width: 768px) {
-    .nav-links { transform: scale(0.9); }
+  /* ═══ MOBILE HAMBURGER ═══ */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
   }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: rgba(245,240,238,0.8);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ═══ MOBILE NAV DROPDOWN ═══ */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(13,13,15,0.97);
+    backdrop-filter: blur(30px);
+    z-index: 99;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 80px 2rem 2rem;
+    min-height: 100vh;
+    border-bottom: 1px solid rgba(139,26,42,0.2);
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    font-family: var(--clash);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: rgba(245,240,238,0.7);
+    text-decoration: none;
+    padding: 0.8rem 0;
+    letter-spacing: -0.5px;
+    transition: color 0.2s;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid rgba(139,26,42,0.1);
+  }
+  .mobile-nav a:last-child { border-bottom: none; }
+  .mobile-nav a:hover { color: var(--white); }
+
+  /* ═══ COMPREHENSIVE RESPONSIVE ═══ */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+    .hero-visual { display: none; }
+    h1.htitle { font-size: clamp(2.6rem,8vw,3.8rem); letter-spacing: -2px; }
+    .hsub { max-width: 100%; margin: 1rem auto 2rem; }
+    .hbtns { justify-content: center; }
+    .hero-stats { justify-content: center; gap: 1.5rem; }
+    .hero-badge { margin: 0 auto 1.5rem; }
+
+    .section { padding: 4rem 1.5rem; }
+    .srv-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .port-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .proc-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-vis { display: none; }
+    .thumb-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+    #motionGrid { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .call-glass { padding: 3rem 2rem; }
+    .call-title { font-size: clamp(2rem,6vw,3rem); }
+    footer { padding: 3rem 1.5rem 2rem; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 0.9rem 1.2rem; }
+    .hero { padding: 6rem 1.2rem 2.5rem; }
+    h1.htitle { font-size: clamp(2.2rem,9vw,3rem); }
+    .srv-grid { grid-template-columns: 1fr; }
+    .port-grid { grid-template-columns: 1fr; }
+    .proc-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .thumb-grid { grid-template-columns: 1fr; gap: 14px; }
+    #motionGrid { grid-template-columns: 1fr !important; }
+    .foot-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .foot-bot { flex-direction: column; gap: 1rem; text-align: center; }
+    .about-cards { grid-template-columns: 1fr 1fr; }
+    .call-ctas { flex-direction: column; align-items: center; }
+    .call-glass { padding: 2.5rem 1.2rem; }
+    .thumb-container { padding: 0 1rem; }
+    .hero-stats { flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    #order { padding: 4rem 1.2rem; }
+    #order .section-in form > div:first-child { grid-template-columns: 1fr !important; }
+    .marq-item { font-size: 0.85rem; }
+    .clients-container { padding: 2rem 1.2rem; }
+  }
+
+  @media (max-width: 400px) {
+    h1.htitle { font-size: 2rem; }
+    .proc-grid { grid-template-columns: 1fr; }
+    .about-cards { grid-template-columns: 1fr; }
+  }
+
+  /* ═══ RECENT WORK IMAGE CARD TEXT OVERLAY (like reference image) ═══ */
+  .rw-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: zoom-in;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .rw-card:hover { transform: translateY(-6px); box-shadow: 0 30px 80px rgba(139,26,42,0.2); }
+  .rw-img-wrap {
+    position: relative;
+    width: 100%;
+    padding-bottom: 62%;
+    overflow: hidden;
+    background: #0d0d0f;
+  }
+  .rw-img-wrap img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .rw-card:hover .rw-img-wrap img { transform: scale(1.05); }
+  /* Bottom-left text with blurred backdrop — exactly like reference */
+  .rw-text-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1rem 1.2rem 0.9rem;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .rw-text-bar-left { text-align: left; }
+  .rw-text-bar-title {
+    font-family: var(--clash, sans-serif);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .rw-text-bar-title strong { font-family: var(--clash, sans-serif); font-weight: 700; }
+  .rw-text-bar-title em { font-family: var(--serif, serif); font-style: italic; font-weight: 400; color: rgba(255,255,255,0.7); }
+  .rw-text-bar-sub {
+    font-size: 0.75rem;
+    color: rgba(245,240,238,0.55);
+    letter-spacing: 0.2px;
+  }
+  .rw-arrow-btn {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;padding-top: 1.3px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .rw-card:hover .rw-arrow-btn { background: rgba(139,26,42,0.5); border-color: rgba(192,37,58,0.7); }
+  .rw-arrow-btn svg { width: 16px; height: 16px; fill: #fff; }
 
 </style>
 </head>
 <body>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#work" onclick="closeMobileNav()">Work</a>
+  <a href="#motion" onclick="closeMobileNav()">Motion</a>
+  <a href="#services" onclick="closeMobileNav()">Services</a>
+  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#order" onclick="closeMobileNav()">Order</a>
+  <a href="mailto:shifateditz@gmail.com" onclick="closeMobileNav()">Email</a>
+</div>
 
 <section id="thumbnails">
     <div class="thumb-container">
@@ -1971,51 +2159,70 @@ function openLightbox(src) {
 // ─── THUMBNAIL CARD (image + lightbox zoom) ───
 function makeThumbnailCard(post, inThumbSection) {
   const card = document.createElement('div');
-  card.className = inThumbSection ? 'thumb-card glass' : 'port-card glass';
+  card.className = inThumbSection ? 'thumb-card glass' : 'rw-card glass';
   card.style.cursor = 'zoom-in';
 
   const ratio = post.ratio === '1:1' ? '100%' : post.ratio === '9:16' ? '177.78%' : post.ratio === '4:3' ? '75%' : '56.25%';
 
-  card.innerHTML = `
-    <div class="${inThumbSection ? 'thumb-media' : 'port-thumb-wrap'}" style="position:relative;width:100%;${inThumbSection ? '' : `padding-bottom:${ratio};`}overflow:hidden;background:#0d0d0f">
-      <img src="${post.image}" alt="${post.title}" loading="lazy"
-        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease"
-        onerror="this.style.background='linear-gradient(135deg,#1a0505,#2d0f0f)'">
-      <div class="thumb-overlay" style="position:absolute;inset:0;background:rgba(13,13,15,0.72);backdrop-filter:blur(6px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;opacity:0;transition:opacity .4s ease">
-        <div style="width:56px;height:56px;border-radius:50%;background:rgba(139,26,42,0.9);display:flex;align-items:center;justify-content:center;box-shadow:0 0 28px rgba(139,26,42,0.8);transform:scale(0.8);transition:transform .3s ease">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
-          </svg>
+  if (inThumbSection) {
+    card.innerHTML = `
+      <div class="thumb-media" style="position:relative;width:100%;overflow:hidden;background:#0d0d0f">
+        <img src="${post.image}" alt="${post.title}" loading="lazy"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease"
+          onerror="this.style.background='linear-gradient(135deg,#1a0505,#2d0f0f)'">
+        <div class="thumb-overlay" style="position:absolute;inset:0;background:rgba(13,13,15,0.72);backdrop-filter:blur(6px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;opacity:0;transition:opacity .4s ease">
+          <div style="width:56px;height:56px;border-radius:50%;background:rgba(139,26,42,0.9);display:flex;align-items:center;justify-content:center;box-shadow:0 0 28px rgba(139,26,42,0.8);transform:scale(0.8);transition:transform .3s ease">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+          </div>
+          <span style="font-family:var(--clash,sans-serif);font-size:0.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.7)">Full Preview</span>
         </div>
-        <span style="font-family:var(--clash,sans-serif);font-size:0.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.7)">Full Preview</span>
       </div>
-    </div>
-    <div style="padding:14px 18px">
-      <div style="font-family:var(--clash,sans-serif);font-weight:700;font-size:0.88rem;color:#fff;margin-bottom:3px">${post.title}</div>
-      ${post.subtitle ? `<div style="font-size:0.7rem;color:rgba(255,255,255,0.38);line-height:1.5">${post.subtitle}</div>` : ''}
-      <div style="font-size:0.65rem;color:rgba(255,255,255,0.25);margin-top:5px;letter-spacing:.5px;text-transform:uppercase">${post.category} · ${post.ratio || '16:9'}</div>
-    </div>
-  `;
+    `;
+  } else {
+    // Recent Work style: image with bottom-left blurred text bar (like reference image)
+    card.innerHTML = `
+      <div class="rw-img-wrap" style="padding-bottom:${ratio}">
+        <img src="${post.image}" alt="${post.title}" loading="lazy"
+          onerror="this.style.background='linear-gradient(135deg,#1a0505,#2d0f0f)'">
+        <div class="rw-text-bar">
+          <div class="rw-text-bar-left">
+            <div class="rw-text-bar-title">
+              <strong>${post.title.split(' ').slice(0,-1).join(' ') || post.title}</strong>
+              ${post.title.split(' ').length > 1 ? `<em>${post.title.split(' ').slice(-1)[0]}</em>` : ''}
+            </div>
+            <div class="rw-text-bar-sub">${post.category || 'Design'}</div>
+          </div>
+          <div class="rw-arrow-btn">
+            <svg viewBox="0 0 24 24"><path d="M14 3l-1.5 1.5L17 9H3v2h14l-4.5 4.5L14 17l7-7z"/></svg>
+          </div>
+        </div>
+      </div>
+    `;
+  }
 
-  // hover overlay
-  const overlay = card.querySelector('.thumb-overlay');
-  const zoomIcon = card.querySelector('.thumb-overlay div');
-  const img = card.querySelector('img');
-  card.addEventListener('mouseenter', () => {
-    overlay.style.opacity = '1';
-    if (zoomIcon) zoomIcon.style.transform = 'scale(1)';
-    if (img) img.style.transform = 'scale(1.06)';
-  });
-  card.addEventListener('mouseleave', () => {
-    overlay.style.opacity = '0';
-    if (zoomIcon) zoomIcon.style.transform = 'scale(0.8)';
-    if (img) img.style.transform = '';
-  });
+  // hover overlay for thumb section
+  if (inThumbSection) {
+    const overlay = card.querySelector('.thumb-overlay');
+    const zoomIcon = card.querySelector('.thumb-overlay div');
+    const img = card.querySelector('img');
+    card.addEventListener('mouseenter', () => {
+      overlay.style.opacity = '1';
+      if (zoomIcon) zoomIcon.style.transform = 'scale(1)';
+      if (img) img.style.transform = 'scale(1.06)';
+    });
+    card.addEventListener('mouseleave', () => {
+      overlay.style.opacity = '0';
+      if (zoomIcon) zoomIcon.style.transform = 'scale(0.8)';
+      if (img) img.style.transform = '';
+    });
+  }
 
   // click → lightbox
   card.addEventListener('click', () => openLightbox(post.image));
 
-  // glass shimmer
+  // glass shimmer (desktop only)
   card.addEventListener('mousemove', e => {
     const r = card.getBoundingClientRect();
     const x = ((e.clientX-r.left)/r.width)*100;
@@ -2127,21 +2334,22 @@ function buildDynamicSection(category, posts) {
   section.innerHTML = `
     <div style="max-width:1200px;margin:0 auto">
       <div class="section">
-        <div class="section-in">
+        <div class="section-in" style="text-align:center">
           <div class="stag" style="margin-bottom:.7rem">✦ Recent Work</div>
           <h2 class="sec-title">${cfg.headline} <em>${cfg.headlineItalic}</em></h2>
-          <p style="color:rgba(255,255,255,0.38);font-size:0.9rem;max-width:480px;margin-bottom:0.5rem;text-align:left">${cfg.sub}</p>
+          <p style="color:rgba(255,255,255,0.38);font-size:0.9rem;max-width:480px;margin-bottom:0.5rem;text-align:center;margin-left:auto;margin-right:auto">${cfg.sub}</p>
           <div class="shimmer"></div>
-          <div id="${anchorId}-grid" style="display:grid;grid-template-columns:repeat(${cfg.isVideo ? 3 : 2},1fr);gap:${cfg.isVideo ? 16 : 24}px;margin-top:2.5rem"></div>
+          <div id="${anchorId}-grid" style="display:grid;grid-template-columns:repeat(${cfg.isVideo ? 3 : 2},1fr);gap:${cfg.isVideo ? 16 : 20}px;margin-top:2.5rem"></div>
         </div>
       </div>
     </div>
   `;
 
-  // Insert before #order section or append before footer
+  // Insert before #thumbnails section (after portfolio, before existing work sections)
+  const thumbsEl = document.getElementById('thumbnails');
   const orderEl = document.getElementById('order');
   const aboutEl = document.getElementById('about');
-  const insertBefore = orderEl || aboutEl || null;
+  const insertBefore = thumbsEl || orderEl || aboutEl || null;
   if (insertBefore) {
     insertBefore.parentNode.insertBefore(section, insertBefore);
   } else {
@@ -2215,5 +2423,37 @@ async function fetchWorks() {
 
 document.addEventListener('DOMContentLoaded', fetchWorks);
 if (document.readyState !== 'loading') fetchWorks();
+
+// ═══ HAMBURGER NAV ═══
+function toggleMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburger');
+  const isOpen = nav.classList.contains('open');
+  nav.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  document.body.style.overflow = isOpen ? '' : 'hidden';
+}
+function closeMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburger');
+  nav.classList.remove('open');
+  btn.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ═══ MOBILE: disable custom cursor ═══
+if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+  document.body.style.cursor = 'auto';
+  const style = document.createElement('style');
+  style.textContent = '* { cursor: auto !important; }';
+  document.head.appendChild(style);
+  const cur = document.getElementById('cur');
+  const ring = document.getElementById('cur-ring');
+  const canvas = document.getElementById('trail-c');
+  if (cur) cur.style.display = 'none';
+  if (ring) ring.style.display = 'none';
+  if (canvas) canvas.style.display = 'none';
+}
 </script>
 </body>
+</html>
