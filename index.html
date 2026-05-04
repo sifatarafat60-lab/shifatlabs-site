@@ -1230,12 +1230,12 @@ footer{
     letter-spacing: 0.2px;
   }
   .rw-arrow-btn {
-    width: 26px; height: 26px;
+    width: 38px; height: 38px;
     border-radius: 50%;
     border: 1.5px solid rgba(255,255,255,0.35);
     background: rgba(255,255,255,0.08);
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;padding-top: 1.3px;
+    flex-shrink: 0;
     transition: background 0.2s, border-color 0.2s;
   }
   .rw-card:hover .rw-arrow-btn { background: rgba(139,26,42,0.5); border-color: rgba(192,37,58,0.7); }
@@ -1710,6 +1710,91 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
           Send Email
         </a>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ REACTIONS & COMMENTS SECTION ═══ -->
+<div id="community" style="border-top:1px solid rgba(139,26,42,0.1);background:rgba(139,26,42,0.012)">
+  <div style="max-width:780px;margin:0 auto;padding:5rem 2rem 4rem">
+    <div class="section-in" id="commSectionIn">
+
+      <!-- Header -->
+      <div style="text-align:center;margin-bottom:3rem">
+        <div class="stag" style="margin:0 auto 1rem">Community</div>
+        <h2 class="sec-title" style="font-size:clamp(1.8rem,3.5vw,2.8rem);margin-bottom:0.5rem">React & <em>Share</em></h2>
+        <p style="color:rgba(255,255,255,0.35);font-size:0.88rem">Tell Shifat what you think — hold the button for emoji reactions</p>
+      </div>
+
+      <!-- ═══ REACTION BAR ═══ -->
+      <div id="reactionWrap" style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:3rem">
+
+        <!-- Main react button (hold to open picker) -->
+        <div style="position:relative" id="reactBtnWrap">
+          <button id="reactMainBtn"
+            style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);border-radius:50px;padding:10px 18px;color:rgba(245,240,238,0.75);font-family:var(--clash);font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;user-select:none;-webkit-user-select:none;position:relative;overflow:hidden"
+            title="Hold to react">
+            <span style="font-size:1.1rem">👍</span>
+            <span>Appreciate</span>
+            <!-- hold progress ring -->
+            <svg id="holdRing" width="36" height="36" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity 0.2s" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="16" fill="none" stroke="rgba(192,37,58,0.5)" stroke-width="2" stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round" transform="rotate(-90 18 18)" id="holdArc"/>
+            </svg>
+          </button>
+
+          <!-- iOS 26-style emoji picker (appears on hold) -->
+          <div id="emojiPicker" style="position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%) scale(0.7);transform-origin:bottom center;background:rgba(22,22,28,0.96);backdrop-filter:blur(28px);border:1px solid rgba(255,255,255,0.12);border-radius:60px;padding:10px 14px;display:flex;gap:6px;align-items:center;opacity:0;pointer-events:none;transition:opacity 0.22s cubic-bezier(0.34,1.56,0.64,1),transform 0.22s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 20px 60px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.05);z-index:200;white-space:nowrap">
+            <button class="ep-btn" data-emoji="🔥" title="Fire" style="font-size:1.7rem;background:none;border:none;cursor:pointer;padding:4px 6px;border-radius:50%;transition:transform 0.15s,background 0.15s;line-height:1">🔥</button>
+            <button class="ep-btn" data-emoji="👍" title="Like" style="font-size:1.7rem;background:none;border:none;cursor:pointer;padding:4px 6px;border-radius:50%;transition:transform 0.15s,background 0.15s;line-height:1">👍</button>
+            <button class="ep-btn" data-emoji="❤️" title="Love" style="font-size:1.7rem;background:none;border:none;cursor:pointer;padding:4px 6px;border-radius:50%;transition:transform 0.15s,background 0.15s;line-height:1">❤️</button>
+            <button class="ep-btn" data-emoji="🤩" title="Amazing" style="font-size:1.7rem;background:none;border:none;cursor:pointer;padding:4px 6px;border-radius:50%;transition:transform 0.15s,background 0.15s;line-height:1">🤩</button>
+            <button class="ep-btn" data-emoji="💯" title="100" style="font-size:1.7rem;background:none;border:none;cursor:pointer;padding:4px 6px;border-radius:50%;transition:transform 0.15s,background 0.15s;line-height:1">💯</button>
+            <button class="ep-btn" data-emoji="🎨" title="Art" style="font-size:1.7rem;background:none;border:none;cursor:pointer;padding:4px 6px;border-radius:50%;transition:transform 0.15s,background 0.15s;line-height:1">🎨</button>
+          </div>
+        </div>
+
+        <!-- Live reaction counts display -->
+        <div id="reactionCounts" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"></div>
+      </div>
+
+      <!-- ═══ FLOATING EMOJI BURST container ═══ -->
+      <div id="emojiBurst" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden"></div>
+
+      <!-- ═══ COMMENT SECTION ═══ -->
+      <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(139,26,42,0.14);border-radius:20px;padding:1.8rem;backdrop-filter:blur(12px)">
+
+        <!-- Comment input -->
+        <div style="margin-bottom:1.5rem">
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--wine-light),var(--wine-deep));display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.9rem;font-weight:700;font-family:var(--clash);color:#fff" id="avatarPreview">?</div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+              <input id="commenterName" type="text" placeholder="Your name…" maxlength="40"
+                style="background:rgba(245,240,238,0.04);border:1px solid rgba(139,26,42,0.18);border-radius:10px;padding:9px 14px;color:var(--white);font-family:var(--sans);font-size:0.82rem;outline:none;transition:border-color .2s;width:100%;max-width:200px"
+                onfocus="this.style.borderColor='rgba(139,26,42,0.5)'" onblur="this.style.borderColor='rgba(139,26,42,0.18)'">
+              <textarea id="commentInput" placeholder="Write something about Shifat's work…" rows="2" maxlength="300"
+                style="background:rgba(245,240,238,0.04);border:1px solid rgba(139,26,42,0.18);border-radius:12px;padding:11px 14px;color:var(--white);font-family:var(--sans);font-size:0.88rem;outline:none;resize:none;transition:border-color .2s;width:100%;line-height:1.6"
+                onfocus="this.style.borderColor='rgba(139,26,42,0.5)'" onblur="this.style.borderColor='rgba(139,26,42,0.18)'"></textarea>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <span id="charCount" style="font-size:0.7rem;color:rgba(255,255,255,0.25)">0 / 300</span>
+                <button id="postCommentBtn"
+                  style="background:linear-gradient(135deg,var(--wine-light),var(--wine-deep));color:#fff;border:none;border-radius:50px;padding:9px 22px;font-family:var(--clash);font-size:0.8rem;font-weight:600;cursor:pointer;transition:box-shadow .2s,transform .15s;box-shadow:0 0 0 1px rgba(192,37,58,0.3)">
+                  Post ↑
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="shimmer" style="margin:0 0 1.5rem"></div>
+
+        <!-- Comments list -->
+        <div id="commentsList" style="display:flex;flex-direction:column;gap:14px;max-height:420px;overflow-y:auto;padding-right:4px">
+          <!-- populated by JS -->
+        </div>
+        <div id="noComments" style="text-align:center;padding:2rem 0;color:rgba(255,255,255,0.22);font-size:0.85rem">Be the first to leave a comment ✦</div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -2454,6 +2539,319 @@ if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
   if (ring) ring.style.display = 'none';
   if (canvas) canvas.style.display = 'none';
 }
+
+// ═══════════════════════════════════════════
+// REACTIONS & COMMENTS SYSTEM
+// ═══════════════════════════════════════════
+(function() {
+  // ── Storage helpers ──
+  const REACTIONS_KEY = 'sl_reactions_v1';
+  const COMMENTS_KEY  = 'sl_comments_v1';
+  const MY_REACT_KEY  = 'sl_my_react_v1';
+
+  function loadReactions() {
+    try { return JSON.parse(localStorage.getItem(REACTIONS_KEY)) || {}; } catch(e) { return {}; }
+  }
+  function saveReactions(r) { localStorage.setItem(REACTIONS_KEY, JSON.stringify(r)); }
+  function loadComments() {
+    try { return JSON.parse(localStorage.getItem(COMMENTS_KEY)) || []; } catch(e) { return []; }
+  }
+  function saveComments(c) { localStorage.setItem(COMMENTS_KEY, JSON.stringify(c)); }
+  function getMyReact() { return localStorage.getItem(MY_REACT_KEY) || null; }
+  function setMyReact(e) { localStorage.setItem(MY_REACT_KEY, e); }
+
+  // ── Emoji config ──
+  const EMOJIS = ['🔥','👍','❤️','🤩','💯','🎨'];
+  const EMOJI_LABELS = { '🔥':'Fire','👍':'Like','❤️':'Love','🤩':'Amazing','💯':'100%','🎨':'Art' };
+
+  // ── Seed some starter counts so it looks active ──
+  function ensureSeeded() {
+    const r = loadReactions();
+    if (Object.keys(r).length === 0) {
+      const seeds = { '🔥': 34, '👍': 52, '❤️': 28, '🤩': 19, '💯': 15, '🎨': 11 };
+      saveReactions(seeds);
+    }
+    const c = loadComments();
+    if (c.length === 0) {
+      const seed = [
+        { id:1, name:'Rafi Ahmed', text:'The thumbnail designs are absolutely fire 🔥 Best designer in BD!', time: Date.now()-3600000*5, emoji:'🔥' },
+        { id:2, name:'Sarah K.', text:'Love the dark aesthetic. The chess king image is stunning.', time: Date.now()-3600000*2, emoji:'❤️' },
+        { id:3, name:'Nakib', text:'Bhai tumi ekta genius 💯 Keep it up!', time: Date.now()-1800000, emoji:'💯' },
+      ];
+      saveComments(seed);
+    }
+  }
+  ensureSeeded();
+
+  // ── Render reaction counts ──
+  function renderReactions() {
+    const r = loadReactions();
+    const myR = getMyReact();
+    const wrap = document.getElementById('reactionCounts');
+    if (!wrap) return;
+    wrap.innerHTML = '';
+    EMOJIS.forEach(em => {
+      const cnt = r[em] || 0;
+      if (cnt === 0) return;
+      const chip = document.createElement('button');
+      chip.style.cssText = `display:inline-flex;align-items:center;gap:5px;background:${myR===em ? 'rgba(139,26,42,0.28)' : 'rgba(255,255,255,0.06)'};border:1px solid ${myR===em ? 'rgba(192,37,58,0.5)' : 'rgba(255,255,255,0.1)'};border-radius:50px;padding:5px 12px 5px 8px;cursor:pointer;font-size:0.85rem;color:rgba(245,240,238,0.8);font-family:var(--sans);font-weight:600;transition:transform .15s,background .2s;user-select:none`;
+      chip.innerHTML = `<span style="font-size:1rem">${em}</span><span>${cnt >= 1000 ? (cnt/1000).toFixed(1)+'k' : cnt}</span>`;
+      chip.title = EMOJI_LABELS[em];
+      chip.addEventListener('click', () => addReaction(em));
+      chip.addEventListener('mouseenter', () => chip.style.transform = 'scale(1.08)');
+      chip.addEventListener('mouseleave', () => chip.style.transform = '');
+      wrap.appendChild(chip);
+    });
+
+    // update main btn
+    const btn = document.getElementById('reactMainBtn');
+    if (btn && myR) {
+      btn.querySelector('span:first-child').textContent = myR;
+      btn.querySelector('span:last-of-type').textContent = 'Appreciated!';
+      btn.style.borderColor = 'rgba(192,37,58,0.5)';
+      btn.style.background = 'rgba(139,26,42,0.22)';
+    }
+  }
+
+  // ── Add reaction ──
+  function addReaction(em) {
+    const r = loadReactions();
+    const prev = getMyReact();
+    if (prev === em) {
+      // toggle off
+      r[em] = Math.max(0, (r[em] || 1) - 1);
+      setMyReact('');
+    } else {
+      if (prev) r[prev] = Math.max(0, (r[prev] || 1) - 1);
+      r[em] = (r[em] || 0) + 1;
+      setMyReact(em);
+      burstEmoji(em);
+    }
+    saveReactions(r);
+    renderReactions();
+    closePicker();
+  }
+
+  // ── Emoji burst animation ──
+  function burstEmoji(em) {
+    const container = document.getElementById('emojiBurst');
+    if (!container) return;
+    for (let i = 0; i < 10; i++) {
+      const el = document.createElement('div');
+      el.textContent = em;
+      const startX = 30 + Math.random() * (window.innerWidth - 60);
+      const startY = window.innerHeight * 0.6 + Math.random() * (window.innerHeight * 0.3);
+      el.style.cssText = `position:fixed;left:${startX}px;top:${startY}px;font-size:${1.4 + Math.random()*1.4}rem;pointer-events:none;z-index:9999;transition:none;opacity:1;transform:scale(0)`;
+      container.appendChild(el);
+      setTimeout(() => {
+        const tx = (Math.random() - 0.5) * 200;
+        const ty = -(80 + Math.random() * 220);
+        el.style.transition = `all ${0.7 + Math.random()*0.5}s cubic-bezier(0.22,1,0.36,1)`;
+        el.style.transform = `translate(${tx}px,${ty}px) scale(1) rotate(${(Math.random()-0.5)*60}deg)`;
+        el.style.opacity = '0';
+      }, 20 + i * 40);
+      setTimeout(() => el.remove(), 1600 + i * 40);
+    }
+  }
+
+  // ── Hold-to-react picker ──
+  let holdTimer = null;
+  let holdStart = null;
+  let pickerOpen = false;
+  const HOLD_MS = 500;
+
+  function openPicker() {
+    const picker = document.getElementById('emojiPicker');
+    picker.style.opacity = '1';
+    picker.style.transform = 'translateX(-50%) scale(1)';
+    picker.style.pointerEvents = 'all';
+    pickerOpen = true;
+  }
+  function closePicker() {
+    const picker = document.getElementById('emojiPicker');
+    picker.style.opacity = '0';
+    picker.style.transform = 'translateX(-50%) scale(0.7)';
+    picker.style.pointerEvents = 'none';
+    pickerOpen = false;
+    // reset ring
+    const arc = document.getElementById('holdArc');
+    const ring = document.getElementById('holdRing');
+    if (arc) arc.style.strokeDashoffset = '100';
+    if (ring) ring.style.opacity = '0';
+  }
+
+  function startHold(e) {
+    holdStart = Date.now();
+    const arc = document.getElementById('holdArc');
+    const ring = document.getElementById('holdRing');
+    if (ring) ring.style.opacity = '0.9';
+    let raf;
+    const animate = () => {
+      const elapsed = Date.now() - holdStart;
+      const pct = Math.min(elapsed / HOLD_MS, 1);
+      if (arc) arc.style.strokeDashoffset = 100 - pct * 100;
+      if (pct < 1) raf = requestAnimationFrame(animate);
+    };
+    raf = requestAnimationFrame(animate);
+    holdTimer = setTimeout(() => {
+      openPicker();
+      cancelAnimationFrame(raf);
+      // haptic if available
+      if (navigator.vibrate) navigator.vibrate(30);
+    }, HOLD_MS);
+  }
+
+  function cancelHold() {
+    clearTimeout(holdTimer);
+    holdTimer = null;
+    const arc = document.getElementById('holdArc');
+    const ring = document.getElementById('holdRing');
+    if (arc) arc.style.strokeDashoffset = '100';
+    if (ring) ring.style.opacity = '0';
+    // if picker wasn't opened, do quick-tap default reaction
+    if (!pickerOpen) {
+      const myR = getMyReact();
+      if (!myR) addReaction('👍');
+    }
+  }
+
+  // Wire hold events
+  const mainBtn = document.getElementById('reactMainBtn');
+  if (mainBtn) {
+    ['mousedown','touchstart'].forEach(ev => mainBtn.addEventListener(ev, e => { e.preventDefault(); startHold(e); }, { passive: false }));
+    ['mouseup','mouseleave','touchend','touchcancel'].forEach(ev => mainBtn.addEventListener(ev, e => {
+      if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; cancelHold(); }
+    }));
+  }
+
+  // Emoji picker buttons
+  document.querySelectorAll('.ep-btn').forEach(btn => {
+    btn.addEventListener('mouseenter', () => { btn.style.transform = 'scale(1.35) translateY(-4px)'; btn.style.background = 'rgba(255,255,255,0.1)'; });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; btn.style.background = 'none'; });
+    btn.addEventListener('click', e => { e.stopPropagation(); addReaction(btn.dataset.emoji); });
+  });
+
+  // Close picker on outside click
+  document.addEventListener('click', e => {
+    if (pickerOpen && !e.target.closest('#reactBtnWrap')) closePicker();
+  });
+
+  // ── Comments ──
+  function timeAgo(ts) {
+    const d = (Date.now() - ts) / 1000;
+    if (d < 60) return 'just now';
+    if (d < 3600) return Math.floor(d/60) + 'm ago';
+    if (d < 86400) return Math.floor(d/3600) + 'h ago';
+    return Math.floor(d/86400) + 'd ago';
+  }
+
+  function getInitial(name) {
+    return (name || '?')[0].toUpperCase();
+  }
+
+  const AVATAR_COLORS = [
+    'linear-gradient(135deg,#8b1a2a,#4a0e18)',
+    'linear-gradient(135deg,#1a4a8b,#0e1a4a)',
+    'linear-gradient(135deg,#1a8b4a,#0e4a1a)',
+    'linear-gradient(135deg,#8b6a1a,#4a3a0e)',
+    'linear-gradient(135deg,#6a1a8b,#2a0e4a)',
+    'linear-gradient(135deg,#8b3a1a,#4a1a0e)',
+  ];
+  function avatarColor(name) {
+    let h = 0; for (let c of (name||'')) h = (h*31 + c.charCodeAt(0)) & 0xffff;
+    return AVATAR_COLORS[h % AVATAR_COLORS.length];
+  }
+
+  function renderComments() {
+    const comments = loadComments();
+    const list = document.getElementById('commentsList');
+    const noC = document.getElementById('noComments');
+    if (!list) return;
+    list.innerHTML = '';
+    if (comments.length === 0) {
+      noC.style.display = 'block'; return;
+    }
+    noC.style.display = 'none';
+    // newest first
+    [...comments].reverse().forEach(c => {
+      const el = document.createElement('div');
+      el.style.cssText = 'display:flex;gap:10px;align-items:flex-start;animation:fadeUp .4s ease both';
+      el.innerHTML = `
+        <div style="width:36px;height:36px;border-radius:50%;background:${avatarColor(c.name)};display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.88rem;font-weight:700;font-family:var(--clash);color:#fff">${getInitial(c.name)}</div>
+        <div style="flex:1;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:10px 14px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span style="font-family:var(--clash);font-size:0.82rem;font-weight:700;color:var(--white)">${c.name || 'Anonymous'}</span>
+            <span style="font-size:0.7rem;color:rgba(255,255,255,0.25)">${timeAgo(c.time)}</span>
+            ${c.emoji ? `<span style="font-size:0.9rem">${c.emoji}</span>` : ''}
+          </div>
+          <p style="font-size:0.86rem;color:rgba(245,240,238,0.65);line-height:1.55;margin:0">${c.text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</p>
+        </div>
+      `;
+      list.appendChild(el);
+    });
+  }
+
+  // Avatar preview on name input
+  const nameInput = document.getElementById('commenterName');
+  const avatarPrev = document.getElementById('avatarPreview');
+  if (nameInput && avatarPrev) {
+    nameInput.addEventListener('input', () => {
+      const n = nameInput.value.trim();
+      avatarPrev.textContent = n ? n[0].toUpperCase() : '?';
+      avatarPrev.style.background = n ? avatarColor(n) : 'rgba(139,26,42,0.4)';
+    });
+  }
+
+  // Char count
+  const textArea = document.getElementById('commentInput');
+  const charCnt = document.getElementById('charCount');
+  if (textArea && charCnt) {
+    textArea.addEventListener('input', () => {
+      const len = textArea.value.length;
+      charCnt.textContent = len + ' / 300';
+      charCnt.style.color = len > 260 ? 'rgba(192,37,58,0.8)' : 'rgba(255,255,255,0.25)';
+    });
+  }
+
+  // Post comment
+  const postBtn = document.getElementById('postCommentBtn');
+  if (postBtn) {
+    postBtn.addEventListener('mouseenter', () => { postBtn.style.boxShadow = '0 0 30px rgba(139,26,42,0.55)'; postBtn.style.transform = 'translateY(-1px)'; });
+    postBtn.addEventListener('mouseleave', () => { postBtn.style.boxShadow = '0 0 0 1px rgba(192,37,58,0.3)'; postBtn.style.transform = ''; });
+    postBtn.addEventListener('click', () => {
+      const name = (nameInput ? nameInput.value.trim() : '') || 'Anonymous';
+      const text = textArea ? textArea.value.trim() : '';
+      if (!text) {
+        textArea.style.borderColor = 'rgba(192,37,58,0.6)';
+        setTimeout(() => textArea.style.borderColor = 'rgba(139,26,42,0.18)', 1200);
+        return;
+      }
+      const comments = loadComments();
+      const myR = getMyReact();
+      comments.push({ id: Date.now(), name, text, time: Date.now(), emoji: myR || '' });
+      saveComments(comments);
+      textArea.value = '';
+      if (charCnt) charCnt.textContent = '0 / 300';
+      renderComments();
+      // scroll to list
+      document.getElementById('commentsList').scrollTop = 0;
+      // mini burst
+      if (myR) burstEmoji(myR); else burstEmoji('✦');
+    });
+  }
+
+  // Scroll to community section observer
+  const commIn = document.getElementById('commSectionIn');
+  if (commIn) {
+    new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+    }, { threshold: 0.1 }).observe(commIn);
+  }
+
+  // Init
+  renderReactions();
+  renderComments();
+})();
 </script>
 </body>
 </html>
