@@ -30,101 +30,34 @@
   --sans:'DM Sans',sans-serif;
 }
 html{scroll-behavior:smooth}
-
-/* ═══ SMOOTH SCROLL MOMENTUM ═══ */
-html{
-  scroll-behavior:smooth;
-  scroll-padding-top:80px;
-}
-* { -webkit-overflow-scrolling: touch; }
-
-/* ═══ PAGE ENTRY ANIMATION ═══ */
-@keyframes pageIn {
-  from { opacity:0; transform:translateY(16px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-#app { animation: pageIn 0.7s cubic-bezier(0.23,1,0.32,1) both; }
-
-/* ═══ SECTION REVEAL — smoother ═══ */
-.section-in{
-  opacity:0;
-  transform:translateY(40px);
-  transition:
-    opacity 1s cubic-bezier(0.25,0.46,0.45,0.94),
-    transform 1s cubic-bezier(0.25,0.46,0.45,0.94);
-  transform-origin:center top;
-}
-.section-in.in-view{opacity:1;transform:translateY(0)}
 body{
   font-family:var(--sans);
   background:var(--bg);color:var(--white);
   overflow-x:hidden;cursor:none;
 }
 
-/* ═══ CUSTOM CURSOR — PREMIUM LIQUID ═══ */
+/* ═══ CUSTOM CURSOR ═══ */
 #cur{
   position:fixed;z-index:9999;
-  width:8px;height:8px;
+  width:10px;height:10px;
   background:#fff;border-radius:50%;
   pointer-events:none;
   transform:translate(-50%,-50%);
   mix-blend-mode:difference;
-  transition:width .25s cubic-bezier(0.23,1,0.32,1),
-             height .25s cubic-bezier(0.23,1,0.32,1),
-             background .25s ease,
-             opacity .2s ease;
-  will-change:transform,width,height;
+  transition:width .2s,height .2s;
 }
 #cur-ring{
   position:fixed;z-index:9998;
-  width:36px;height:36px;
-  border:1px solid rgba(192,37,58,0.5);
+  width:38px;height:38px;
+  border:1.5px solid rgba(139,26,42,0.7);
   border-radius:50%;
   pointer-events:none;
   transform:translate(-50%,-50%);
-  transition:width .5s cubic-bezier(0.23,1,0.32,1),
-             height .5s cubic-bezier(0.23,1,0.32,1),
-             border-color .4s ease,
-             opacity .3s ease;
-  background:radial-gradient(circle, rgba(139,26,42,0.06) 0%, transparent 70%);
-  backdrop-filter:blur(1px);
-  will-change:transform,width,height;
-}
-#cur-dot{
-  position:fixed;z-index:10000;
-  width:4px;height:4px;
-  background:rgba(192,37,58,0.9);
-  border-radius:50%;
-  pointer-events:none;
-  transform:translate(-50%,-50%);
-  box-shadow:0 0 8px rgba(192,37,58,0.7);
-  transition:opacity .2s ease;
-  will-change:transform;
+  transition:width .3s,height .3s,border-color .3s;
 }
 #trail-c{position:fixed;z-index:9997;pointer-events:none;top:0;left:0;width:100%;height:100%}
-
-/* hover states */
-.hov-big #cur{
-  width:48px;height:48px;
-  background:rgba(139,26,42,0.12);
-  mix-blend-mode:normal;
-}
-.hov-big #cur-ring{
-  width:52px;height:52px;
-  border-color:rgba(192,37,58,0.7);
-  background:radial-gradient(circle,rgba(139,26,42,0.08) 0%,transparent 70%);
-}
-.hov-big #cur-dot{ opacity:0; }
-
-/* text hover */
-.hov-text #cur{
-  width:2px;height:28px;
-  border-radius:2px;
-  background:rgba(192,37,58,0.9);
-  mix-blend-mode:normal;
-}
-.hov-text #cur-ring{ opacity:0; }
-.hov-text #cur-dot{ opacity:0; }
+.hov-big #cur{width:60px;height:60px;background:rgba(139,26,42,0.15)}
+.hov-big #cur-ring{width:70px;height:70px;border-color:rgba(160,32,53,0.9)}
 
 /* ═══ NOISE ═══ */
 body::after{
@@ -156,14 +89,10 @@ body::after{
 
 /* ═══ WRAPPER ═══ */
 #app{position:relative;z-index:2}
-#app > *:not(nav) { position:relative; z-index:auto; }
-section, .section, [id]:not(#cur):not(#cur-ring):not(#trail-c):not(#lightbox-overlay):not(#app) {
-  isolation: isolate;
-}
 
 /* ═══ NAV ═══ */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
+  position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
   padding:1.1rem 3rem;
   background:rgba(13,13,15,0.6);
@@ -591,29 +520,17 @@ footer{
   padding-top:2rem;border-top:1px solid rgba(139,26,42,0.1);
   font-size:0.76rem;color:rgba(245,240,238,0.16);
 }
-.soc-row{display:flex;gap:10px;flex-wrap:wrap}
+.soc-row{display:flex;gap:10px}
 .soc{
-  width:40px;height:40px;
-  border-radius:50%;
+  width:36px;height:36px;border-radius:50%;
   border:1px solid rgba(139,26,42,0.2);
   background:rgba(139,26,42,0.06);
   display:flex;align-items:center;justify-content:center;
   text-decoration:none;transition:all .2s;cursor:none;
-  flex-shrink:0;
-  box-sizing:border-box;
-  -webkit-border-radius:50%;
-  aspect-ratio:1/1;
-  overflow:hidden;
 }
 .soc:hover{border-color:rgba(139,26,42,0.55);background:rgba(139,26,42,0.14)}
-.soc svg{width:14px;height:14px;fill:rgba(245,240,238,0.32);flex-shrink:0}
+.soc svg{width:14px;height:14px;fill:rgba(245,240,238,0.32)}
 .soc:hover svg{fill:rgba(192,37,58,0.9)}
-@media(max-width:600px){
-  .soc{width:44px;height:44px;border-radius:50%;-webkit-border-radius:50%;aspect-ratio:1/1}
-  .soc svg{width:16px;height:16px}
-  .soc-row{gap:10px;justify-content:center}
-  .foot-bot{flex-direction:column;align-items:center;gap:1.2rem;text-align:center}
-}
 
   /* ═══ THINNER BEAM LIGHT EFFECT ═══ */
   .glass, .port-card, .srv-card, .proc-card, .about-card, .btn-primary {
@@ -774,7 +691,6 @@ footer{
 <!-- Cursor -->
 <div id="cur"></div>
 <div id="cur-ring"></div>
-<div id="cur-dot"></div>
 <canvas id="trail-c"></canvas>
 
 <!-- Ambient -->
@@ -1209,17 +1125,17 @@ footer{
     justify-content: center;
     gap: 5px;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    background: rgba(255,255,255,0.07);
-    border: 0.5px solid rgba(255,255,255,0.15);
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     box-shadow:
-      0 4px 16px rgba(0,0,0,0.25),
-      0 1px 0 rgba(255,255,255,0.1) inset,
-      0 0 0 0.5px rgba(255,255,255,0.06) inset;
+      0 2px 8px rgba(0,0,0,0.3),
+      0 0 0 0.5px rgba(255,255,255,0.08) inset,
+      0 1px 0 rgba(255,255,255,0.12) inset;
     position: relative;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.23,1,0.32,1);
@@ -1228,29 +1144,29 @@ footer{
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 12px;
-    background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, transparent 55%);
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
     pointer-events: none;
   }
   .hamburger:active {
-    transform: scale(0.92);
-    background: rgba(255,255,255,0.11);
+    transform: scale(0.93);
+    background: rgba(255,255,255,0.1);
   }
   .hamburger span {
     display: block;
-    width: 16px;
+    width: 18px;
     height: 1.5px;
     background: rgba(245,240,238,0.88);
     border-radius: 2px;
     transition: all 0.35s cubic-bezier(0.23,1,0.32,1);
     position: relative;
   }
-  .hamburger span:nth-child(1) { width: 16px; }
-  .hamburger span:nth-child(2) { width: 16px; }
-  .hamburger span:nth-child(3) { width: 16px; }
-  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); width: 16px; }
+  .hamburger span:nth-child(1) { width: 18px; }
+  .hamburger span:nth-child(2) { width: 13px; }
+  .hamburger span:nth-child(3) { width: 18px; }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); width: 18px; }
   .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); width: 16px; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); width: 18px; }
 
   /* ═══ MOBILE NAV DROPDOWN ═══ */
   .mobile-nav {
@@ -2028,7 +1944,7 @@ fetchWorks = async function() {
   </div>
 </div>
 <!-- CLIENTS HEADLINE & BAR -->
-<div class="clients-container" style="margin-top: 0px;padding-top: 100px; padding-bottom: 100px; text-align: center; position:relative; z-index:1; width:100%;">
+<div class="clients-container" style="margin-top: 0px;padding-top: 100px; padding-bottom: 100px; text-align: center; position:relative; z-index:2; width:100%;">
   <h2 style="font-family: var(--clash); font-size: 5rem; color: #fff; margin-bottom: 10px; letter-spacing: 1px;">
     Trusted by <span style="font-family: 'DM Serif Display', serif; font-style: italic; text-transform: none; opacity: 1;">Industry</span>
   </h2>
@@ -2153,9 +2069,6 @@ fetchWorks = async function() {
               <span class="skill-pill">Typography</span>
               <span class="skill-pill">Color Theory</span>
               <span class="skill-pill">Brand Strategy</span>
-              <span class="skill-pill">Adobe Premier Pro</span>
-              <span class="skill-pill">Capcut Pro</span>
-              <span class="skill-pill">Marketing</span>
             </div>
           </div>
         </div>
@@ -2179,7 +2092,7 @@ fetchWorks = async function() {
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
         <div>
           <label style="font-size:0.72rem;color:rgba(255,255,255,0.35);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:7px">Your Name</label>
-          <input name="name" type="text" placeholder="type your name..." required style="width:100%;background:rgba(245,240,238,0.03);border:1px solid rgba(139,26,42,0.18);border-radius:12px;padding:13px 16px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color .2s;cursor:text" onfocus="this.style.borderColor='rgba(139,26,42,0.55)'" onblur="this.style.borderColor='rgba(139,26,42,0.18)'">
+          <input name="name" type="text" placeholder="e.g. Rafi Ahmed" required style="width:100%;background:rgba(245,240,238,0.03);border:1px solid rgba(139,26,42,0.18);border-radius:12px;padding:13px 16px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color .2s;cursor:text" onfocus="this.style.borderColor='rgba(139,26,42,0.55)'" onblur="this.style.borderColor='rgba(139,26,42,0.18)'">
         </div>
         <div>
           <label style="font-size:0.72rem;color:rgba(255,255,255,0.35);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:7px">Your Email</label>
@@ -2188,151 +2101,17 @@ fetchWorks = async function() {
       </div>
       <div>
         <label style="font-size:0.72rem;color:rgba(255,255,255,0.35);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:7px">Service Needed</label>
-        <!-- Hidden real input for form submission -->
-        <input type="hidden" name="service" id="serviceHiddenInput" required>
-        <!-- iOS Liquid Custom Dropdown -->
-        <div id="iosDropdown" style="position:relative;user-select:none;-webkit-user-select:none">
-          <div id="iosDropdownTrigger"
-            style="width:100%;background:rgba(17,17,21,0.95);border:1px solid rgba(139,26,42,0.18);border-radius:16px;padding:13px 16px;color:rgba(245,240,238,0.35);font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:border-color .25s,box-shadow .25s;-webkit-tap-highlight-color:transparent">
-            <span id="iosDropdownLabel">Select a service…</span>
-            <svg id="iosDropdownChevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(192,37,58,0.7)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .35s cubic-bezier(0.34,1.56,0.64,1);flex-shrink:0"><polyline points="6 9 12 15 18 9"/></svg>
-          </div>
-        </div>
-        <!-- Liquid Panel — FIXED to viewport so no overflow clipping -->
-        <div id="iosDropdownPanel"
-          style="position:fixed;z-index:99999;
-                 background:rgba(22,22,28,0.97);
-                 border:1px solid rgba(139,26,42,0.32);
-                 border-radius:20px;
-                 backdrop-filter:blur(40px) saturate(200%);
-                 -webkit-backdrop-filter:blur(40px) saturate(200%);
-                 box-shadow:0 32px 80px rgba(0,0,0,0.8),0 0 0 1px rgba(255,255,255,0.05) inset;
-                 transform-origin:top center;
-                 transform:scaleY(0.75) translateY(-10px);
-                 opacity:0;
-                 pointer-events:none;
-                 transition:transform .38s cubic-bezier(0.34,1.2,0.64,1), opacity .25s ease;
-                 max-height:300px;overflow-y:auto;
-                 width:0;left:0;top:0">
-          <div class="ios-opt ios-opt-placeholder" data-value="" style="padding:13px 18px;font-family:'DM Sans',sans-serif;font-size:0.82rem;color:rgba(245,240,238,0.22);border-bottom:1px solid rgba(139,26,42,0.12);cursor:default;text-align:center;letter-spacing:0.3px">Select a service…</div>
-          <div class="ios-opt" data-value="Thumbnail Design">Thumbnail Design</div>
-          <div class="ios-opt" data-value="Brand Identity">Brand Identity</div>
-          <div class="ios-opt" data-value="Motion Graphics">Motion Graphics</div>
-          <div class="ios-opt" data-value="Social Media Posts">Social Media Posts</div>
-          <div class="ios-opt" data-value="Documentary Edits">Documentary Edits</div>
-          <div class="ios-opt" data-value="Poster Design">Poster Design</div>
-          <div class="ios-opt" data-value="Creative Direction">Creative Direction</div>
-          <div class="ios-opt" data-value="Other">Other</div>
-        </div>
-        <style>
-        .ios-opt {
-          padding: 13px 20px;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 0.9rem;
-          color: rgba(245,240,238,0.82);
-          cursor: pointer;
-          transition: background .15s ease, color .15s ease;
-          border-bottom: 1px solid rgba(139,26,42,0.08);
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          letter-spacing: 0.1px;
-          -webkit-tap-highlight-color: transparent;
-          white-space: nowrap;
-        }
-        .ios-opt:last-child { border-bottom: none; }
-        .ios-opt:hover, .ios-opt:active { background: rgba(139,26,42,0.2); color: #fff; }
-        .ios-opt.selected { background: rgba(139,26,42,0.22); color: rgba(192,37,58,0.95); font-weight: 600; }
-        .ios-opt.selected::after {
-          content: ''; display: inline-block;
-          width: 7px; height: 7px; border-radius: 50%;
-          background: rgba(192,37,58,0.85); margin-left: auto;
-          box-shadow: 0 0 8px rgba(192,37,58,0.6);
-        }
-        .ios-opt.ios-opt-placeholder { cursor: default; }
-        .ios-opt.ios-opt-placeholder:hover { background: transparent; color: rgba(245,240,238,0.22); }
-        #iosDropdownPanel::-webkit-scrollbar { width: 4px; }
-        #iosDropdownPanel::-webkit-scrollbar-track { background: transparent; }
-        #iosDropdownPanel::-webkit-scrollbar-thumb { background: rgba(139,26,42,0.4); border-radius: 4px; }
-        </style>
-        <script>
-        (function(){
-          const trigger  = document.getElementById('iosDropdownTrigger');
-          const panel    = document.getElementById('iosDropdownPanel');
-          const label    = document.getElementById('iosDropdownLabel');
-          const chevron  = document.getElementById('iosDropdownChevron');
-          const hidden   = document.getElementById('serviceHiddenInput');
-          let open = false;
-
-          function positionPanel() {
-            const r = trigger.getBoundingClientRect();
-            panel.style.left  = r.left + 'px';
-            panel.style.width = r.width + 'px';
-            // Open below or above depending on space
-            const spaceBelow = window.innerHeight - r.bottom;
-            const panelH = Math.min(panel.scrollHeight || 300, 300);
-            if (spaceBelow < panelH + 12 && r.top > panelH + 12) {
-              // open above
-              panel.style.top    = '';
-              panel.style.bottom = (window.innerHeight - r.top + 8) + 'px';
-              panel.style.transformOrigin = 'bottom center';
-            } else {
-              panel.style.bottom = '';
-              panel.style.top    = (r.bottom + 8) + 'px';
-              panel.style.transformOrigin = 'top center';
-            }
-          }
-
-          function openPanel() {
-            open = true;
-            positionPanel();
-            panel.style.pointerEvents = 'all';
-            panel.style.opacity = '1';
-            panel.style.transform = 'scaleY(1) translateY(0)';
-            chevron.style.transform = 'rotate(180deg)';
-            trigger.style.borderColor = 'rgba(139,26,42,0.6)';
-            trigger.style.boxShadow = '0 0 0 3px rgba(139,26,42,0.12)';
-          }
-          function closePanel() {
-            open = false;
-            panel.style.pointerEvents = 'none';
-            panel.style.opacity = '0';
-            panel.style.transform = 'scaleY(0.75) translateY(-10px)';
-            chevron.style.transform = 'rotate(0deg)';
-            trigger.style.borderColor = 'rgba(139,26,42,0.18)';
-            trigger.style.boxShadow = 'none';
-          }
-
-          trigger.addEventListener('click', function(e){ e.stopPropagation(); open ? closePanel() : openPanel(); });
-          trigger.addEventListener('touchend', function(e){ e.preventDefault(); open ? closePanel() : openPanel(); });
-
-          panel.querySelectorAll('.ios-opt[data-value]').forEach(function(opt){
-            function pick() {
-              const val = opt.dataset.value;
-              if (!val) return;
-              label.textContent = opt.textContent.trim();
-              label.style.color = 'rgba(245,240,238,0.9)';
-              hidden.value = val;
-              panel.querySelectorAll('.ios-opt').forEach(o => o.classList.remove('selected'));
-              opt.classList.add('selected');
-              trigger.style.transform = 'scale(0.985)';
-              setTimeout(() => { trigger.style.transform = ''; }, 120);
-              closePanel();
-            }
-            opt.addEventListener('click', pick);
-            opt.addEventListener('touchend', function(e){ e.preventDefault(); pick(); });
-          });
-
-          document.addEventListener('click', function(e){
-            if (open && !trigger.contains(e.target) && !panel.contains(e.target)) closePanel();
-          });
-          document.addEventListener('touchstart', function(e){
-            if (open && !trigger.contains(e.target) && !panel.contains(e.target)) closePanel();
-          }, { passive: true });
-          window.addEventListener('scroll', function(){ if(open) positionPanel(); }, { passive: true });
-          window.addEventListener('resize', function(){ if(open) positionPanel(); });
-        })();
-        </script>
+        <select name="service" required style="width:100%;background:rgba(17,17,21,0.95);border:1px solid rgba(139,26,42,0.18);border-radius:12px;padding:13px 16px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color .2s;cursor:pointer;-webkit-appearance:none;appearance:none" onfocus="this.style.borderColor='rgba(139,26,42,0.55)'" onblur="this.style.borderColor='rgba(139,26,42,0.18)'">
+          <option value="" disabled selected>Select a service…</option>
+          <option value="Thumbnail Design">Thumbnail Design</option>
+          <option value="Brand Identity">Brand Identity</option>
+          <option value="Motion Graphics">Motion Graphics</option>
+          <option value="Social Media Posts">Social Media Posts</option>
+          <option value="Documentary Edits">Documentary Edits</option>
+          <option value="Poster Design">Poster Design</option>
+          <option value="Creative Direction">Creative Direction</option>
+          <option value="Other">Other</option>
+        </select>
       </div>
       <div>
         <label style="font-size:0.72rem;color:rgba(255,255,255,0.35);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:7px">Project Details</label>
@@ -2354,14 +2133,6 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
   e.preventDefault();
   const btn=document.getElementById('ord-btn');
   const status=document.getElementById('ord-status');
-  // Validate service selection
-  const svc = document.getElementById('serviceHiddenInput');
-  if (!svc || !svc.value) {
-    const trigger = document.getElementById('iosDropdownTrigger');
-    if(trigger){trigger.style.borderColor='rgba(192,37,58,0.7)';trigger.style.boxShadow='0 0 0 3px rgba(192,37,58,0.15)';setTimeout(()=>{trigger.style.borderColor='rgba(139,26,42,0.18)';trigger.style.boxShadow='none';},2000);}
-    status.style.display='block';status.style.background='rgba(192,37,58,0.1)';status.style.border='1px solid rgba(192,37,58,0.3)';status.style.color='rgba(255,100,100,0.9)';status.innerHTML='Please select a service first.';
-    return;
-  }
   btn.style.opacity='0.6';
   btn.textContent='Sending…';
   const data=new FormData(this);
@@ -2411,7 +2182,7 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
     <!-- Section Header -->
     <div style="text-align:center;margin-bottom:3rem">
       <div class="stag" style="margin:0 auto 1rem">Community</div>
-      <h2 class="sec-title" style="font-size:clamp(2rem,3.5vw,3rem)">Leave a <em>Message.</em></h2>
+      <h2 class="sec-title" style="font-size:clamp(2rem,3.5vw,3rem)">Leave a <em>mark.</em></h2>
       <p style="color:rgba(255,255,255,0.35);font-size:0.88rem;line-height:1.75;max-width:400px;margin:0.8rem auto 0">React to the work. Drop a thought. Every voice shapes the studio.</p>
     </div>
 
@@ -2431,7 +2202,7 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
           <div>
             <label style="font-size:0.66rem;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.3);display:block;margin-bottom:7px">Your Name</label>
-            <input id="commenterName" type="text" placeholder="e.g.type your name..." maxlength="50"
+            <input id="commenterName" type="text" placeholder="type your name" maxlength="50"
               style="width:100%;background:rgba(245,240,238,0.04);border:1px solid rgba(139,26,42,0.22);border-radius:12px;padding:11px 15px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.86rem;outline:none;transition:border-color .2s"
               onfocus="this.style.borderColor='rgba(192,37,58,0.6)'" onblur="this.style.borderColor='rgba(139,26,42,0.22)'">
           </div>
@@ -2469,7 +2240,7 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
         Loading community…
       </div>
       <div id="noComments" style="display:none;text-align:center;padding:2rem 0;color:rgba(255,255,255,0.22);font-size:0.85rem">
-        No comments yet — be the first to leave a message ✦
+        No comments yet — be the first to leave a mark ✦
       </div>
       <div id="commentsList" style="display:flex;flex-direction:column;gap:14px"></div>
     </div>
@@ -2902,158 +2673,90 @@ const LOGO_SRC = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1B
   if(el) el.src=LOGO_SRC;
 });
 
-// ═══ CURSOR — PREMIUM LIQUID ═══
-const cur    = document.getElementById('cur');
-const ring   = document.getElementById('cur-ring');
-const dot    = document.getElementById('cur-dot');
-const canvas = document.getElementById('trail-c');
-const ctx    = canvas.getContext('2d');
-
-canvas.width  = window.innerWidth;
-canvas.height = window.innerHeight;
-window.addEventListener('resize', () => {
-  canvas.width  = window.innerWidth;
-  canvas.height = window.innerHeight;
+// ═══ CURSOR ═══
+const cur=document.getElementById('cur');
+const ring=document.getElementById('cur-ring');
+const canvas=document.getElementById('trail-c');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight});
+let mx=-100,my=-100,rx=-100,ry=-100,trail=[];
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+  trail.push({x:mx,y:my});
+  if(trail.length>20)trail.shift();
 });
-
-// Positions — cur follows instantly, ring lerps smoothly
-let mx = -200, my = -200;
-let rx = -200, ry = -200;
-let trail = [];
-let isHovering = false;
-
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
-  if (dot) { dot.style.left = mx + 'px'; dot.style.top = my + 'px'; }
-  trail.push({ x: mx, y: my, t: Date.now() });
-  if (trail.length > 28) trail.shift();
-});
-
-// Smooth ring lag with lerp
-(function anim() {
-  // Higher lerp = less lag; 0.10 = silky smooth premium feel
-  rx += (mx - rx) * 0.10;
-  ry += (my - ry) * 0.10;
-  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-
-  // Trail — fade by age
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const now = Date.now();
-  trail.forEach((t, i) => {
-    const age  = (now - t.t) / 300; // 0..1 fade by time
-    const a    = Math.max(0, (1 - age) * (i / trail.length) * 0.18);
-    const size = (i / trail.length) * 4.5;
-    ctx.beginPath();
-    ctx.arc(t.x, t.y, size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(192,37,58,${a})`;
-    ctx.fill();
+(function anim(){
+  rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  trail.forEach((t,i)=>{
+    const a=(i/trail.length)*.22;
+    const s=(i/trail.length)*5;
+    ctx.beginPath();ctx.arc(t.x,t.y,s,0,Math.PI*2);
+    ctx.fillStyle=`rgba(139,26,42,${a})`;ctx.fill();
   });
-
   requestAnimationFrame(anim);
 })();
-
-// Hover states
-document.querySelectorAll('a, button, .glass, [onclick], .hamburger, .nav-cta, .port-card, .thumb-card').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('hov-big'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('hov-big'));
-});
-document.querySelectorAll('p, h1, h2, h3, label, .srv-desc, .about-copy').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('hov-text'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('hov-text'));
-});
-
-// Hide cursor when leaving window
-document.addEventListener('mouseleave', () => {
-  cur.style.opacity = '0'; ring.style.opacity = '0';
-  if (dot) dot.style.opacity = '0';
-});
-document.addEventListener('mouseenter', () => {
-  cur.style.opacity = '1'; ring.style.opacity = '1';
-  if (dot) dot.style.opacity = '1';
+document.querySelectorAll('a,button,.glass').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov-big'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov-big'));
 });
 
 // ═══ SCROLL REVEAL ═══
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.section-in').forEach(el => revealObserver.observe(el));
+new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in-view')});
+},{threshold:.1,rootMargin:'0px 0px -60px 0px'}).observe(
+  ...Array.from(document.querySelectorAll('.section-in'))
+);
+document.querySelectorAll('.section-in').forEach(el=>{
+  new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in-view')});
+  },{threshold:.1}).observe(el);
+});
 
-// ═══ 3D TILT — smoother ═══
-document.querySelectorAll('.glass').forEach(card => {
-  let tiltRaf;
-  card.addEventListener('mousemove', e => {
-    cancelAnimationFrame(tiltRaf);
-    tiltRaf = requestAnimationFrame(() => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width  - 0.5;
-      const y = (e.clientY - r.top)  / r.height - 0.5;
-      card.style.transform = `translateY(-6px) rotateX(${y * -8}deg) rotateY(${x * 8}deg)`;
-      card.style.transition = 'transform 0.1s ease';
-    });
+// ═══ 3D TILT ═══
+document.querySelectorAll('.glass').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`translateY(-6px) rotateX(${y*-10}deg) rotateY(${x*10}deg)`;
   });
-  card.addEventListener('mouseleave', () => {
-    card.style.transition = 'transform 0.6s cubic-bezier(0.23,1,0.32,1)';
-    card.style.transform = '';
+  card.addEventListener('mouseleave',()=>{card.style.transform=''});
+});
+
+// ═══ LOGO 3D & GRADIENT ═══
+const logo3d=document.getElementById('logo3d');
+document.addEventListener('mousemove',e=>{
+  const cx=window.innerWidth/2,cy=window.innerHeight/2;
+  const dx=(e.clientX-cx)/cx,dy=(e.clientY-cy)/cy;
+  if(logo3d)logo3d.style.transform=`perspective(800px) rotateX(${dy*-14}deg) rotateY(${dx*14}deg)`;
+  const angle=Math.atan2(e.clientY-cy,e.clientX-cx)*(180/Math.PI);
+  document.querySelectorAll('.gtext,.htitle em').forEach(el=>{
+    el.style.backgroundImage=`linear-gradient(${angle}deg,#c0253a 20%,#8b1a2a 35%,#6b1423 55%,#3a0a12 75%,#8b1a2a 100%)`;
+    el.style.backgroundSize='300% 300%';
+    el.style.webkitBackgroundClip='text';el.style.webkitTextFillColor='transparent';el.style.backgroundClip='text';
   });
 });
 
-// ═══ LOGO 3D ═══
-const logo3d = document.getElementById('logo3d');
-let logoRaf;
-document.addEventListener('mousemove', e => {
-  cancelAnimationFrame(logoRaf);
-  logoRaf = requestAnimationFrame(() => {
-    const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
-    const dx = (e.clientX - cx) / cx, dy = (e.clientY - cy) / cy;
-    if (logo3d) logo3d.style.transform = `perspective(900px) rotateX(${dy * -12}deg) rotateY(${dx * 12}deg)`;
-    const angle = Math.atan2(e.clientY - cy, e.clientX - cx) * (180 / Math.PI);
-    document.querySelectorAll('.gtext,.htitle em').forEach(el => {
-      el.style.backgroundImage = `linear-gradient(${angle}deg,#c0253a 20%,#8b1a2a 35%,#6b1423 55%,#3a0a12 75%,#8b1a2a 100%)`;
-      el.style.backgroundSize = '300% 300%';
-      el.style.webkitBackgroundClip = 'text';
-      el.style.webkitTextFillColor  = 'transparent';
-      el.style.backgroundClip = 'text';
-    });
-  });
+// ═══ SCROLL PARALLAX ═══
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY;
+  const hv=document.getElementById('heroVis');
+  if(hv)hv.style.transform=`translateY(${sy*.11}px)`;
 });
 
-// ═══ SCROLL PARALLAX — RAF throttled ═══
-let lastScrollY = 0, scrollRaf;
-window.addEventListener('scroll', () => {
-  lastScrollY = window.scrollY;
-  if (!scrollRaf) {
-    scrollRaf = requestAnimationFrame(() => {
-      const hv = document.getElementById('heroVis');
-      if (hv) hv.style.transform = `translateY(${lastScrollY * 0.1}px)`;
-
-      // Parallax blobs
-      document.querySelectorAll('.blob').forEach((b, i) => {
-        const speed = [0.04, 0.06, 0.03][i] || 0.04;
-        b.style.transform = `translateY(${lastScrollY * speed}px)`;
-      });
-
-      scrollRaf = null;
-    });
-  }
-});
-
-// ═══ GLASS SHIMMER — RAF throttled ═══
-document.querySelectorAll('.glass').forEach(el => {
-  let shimRaf;
-  el.addEventListener('mousemove', e => {
-    cancelAnimationFrame(shimRaf);
-    shimRaf = requestAnimationFrame(() => {
-      const r = el.getBoundingClientRect();
-      const x = ((e.clientX - r.left) / r.width)  * 100;
-      const y = ((e.clientY - r.top)  / r.height) * 100;
-      el.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 45%, transparent 70%)`;
-    });
+// ═══ GLASS SHIMMER ═══
+document.querySelectorAll('.glass').forEach(el=>{
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width)*100;
+    const y=((e.clientY-r.top)/r.height)*100;
+    el.style.background=`radial-gradient(circle at ${x}% ${y}%,rgba(255,255,255,0.065) 0%,rgba(255,255,255,0.018) 50%,rgba(255,255,255,0.018) 100%)`;
   });
-  el.addEventListener('mouseleave', () => {
-    el.style.transition = 'background 0.5s ease';
-    el.style.background = '';
-  });
+  el.addEventListener('mouseleave',()=>{el.style.background=''});
 });
 
 // ═══ PORTFOLIO (4:5 ratio) ═══
@@ -3290,7 +2993,7 @@ const CAT_CONFIG = {
     section: "dynamic",
     headline: "Creative",
     headlineItalic: "Design",
-    sub: "Bold, imaginative compositions that push visual boundaries and spark Conversations.",
+    sub: "Bold, imaginative compositions that push visual boundaries and spark conversations.",
     isVideo: false,
   },
   "Poster Design": {
@@ -3670,10 +3373,12 @@ if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
   const style = document.createElement('style');
   style.textContent = '* { cursor: auto !important; }';
   document.head.appendChild(style);
-  ['cur','cur-ring','cur-dot','trail-c'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-  });
+  const cur = document.getElementById('cur');
+  const ring = document.getElementById('cur-ring');
+  const canvas = document.getElementById('trail-c');
+  if (cur) cur.style.display = 'none';
+  if (ring) ring.style.display = 'none';
+  if (canvas) canvas.style.display = 'none';
 }
 
 // ═══ SUPABASE: Load client logos ═══
