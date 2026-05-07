@@ -1280,6 +1280,179 @@ footer{
   body { overflow-x: hidden; }
   #app { overflow-x: hidden; }
 
+  /* ══════════════════════════════════════════
+     MOBILE OPTIMIZATION — COMPREHENSIVE
+  ══════════════════════════════════════════ */
+
+  /* ── Hero section ── */
+  @media (max-width: 600px) {
+    .hero { padding: 5.5rem 1.1rem 2rem; }
+    h1.htitle { font-size: clamp(2rem, 10vw, 2.8rem); letter-spacing: -1.5px; line-height: 0.96; }
+    .hsub { font-size: 0.9rem; line-height: 1.65; margin: 0.9rem auto 1.6rem; }
+    .hero-badge { font-size: 0.62rem; letter-spacing: 2px; padding: 5px 13px; }
+    .hbtns { flex-direction: column; align-items: center; gap: 10px; }
+    .btn-p, .btn-s { width: 100%; max-width: 280px; justify-content: center; font-size: 0.88rem; padding: 12px 20px; }
+    .hero-stats { gap: 0.8rem; }
+    .stat label { font-size: 0.65rem; }
+    .stat strong { font-size: 1.3rem; }
+  }
+  @media (max-width: 380px) {
+    h1.htitle { font-size: 1.9rem; }
+    .hero { padding: 5rem 1rem 1.8rem; }
+  }
+
+  /* ── Nav ── */
+  @media (max-width: 600px) {
+    nav { padding: 0.8rem 1rem; }
+    .nav-brand { font-size: 1.05rem; }
+    .nav-logo img { width: 26px; height: 26px; }
+  }
+  @media (max-width: 360px) {
+    .nav-brand { font-size: 0.95rem; }
+  }
+
+  /* ── Marquee ── */
+  @media (max-width: 600px) {
+    .marq-item { font-size: 0.78rem; padding: 0 14px; }
+    .marq-section { padding: 0; }
+  }
+
+  /* ── Section titles & tags ── */
+  @media (max-width: 600px) {
+    .sec-title { font-size: clamp(1.8rem, 8vw, 2.4rem) !important; }
+    .stag { font-size: 0.65rem; letter-spacing: 2px; padding: 4px 12px; }
+    .section { padding: 3rem 1.1rem; }
+    .section-in { gap: 1.5rem; }
+  }
+
+  /* ── Services grid ── */
+  @media (max-width: 600px) {
+    .srv-grid { grid-template-columns: 1fr; gap: 10px; }
+    .srv-card { padding: 1.4rem 1.2rem; }
+    .srv-name { font-size: 1rem; }
+    .srv-desc { font-size: 0.82rem; }
+  }
+
+  /* ── Portfolio grid ── */
+  @media (max-width: 600px) {
+    .port-grid { grid-template-columns: 1fr; gap: 12px; }
+    .port-card { border-radius: 14px; }
+  }
+
+  /* ── Process grid ── */
+  @media (max-width: 480px) {
+    .proc-grid { grid-template-columns: 1fr; gap: 10px; }
+    .proc-card { padding: 1.2rem 1rem; }
+    .proc-num { font-size: 2rem; }
+  }
+
+  /* ── About section ── */
+  @media (max-width: 600px) {
+    .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .about-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .about-card { padding: 1.1rem 0.9rem; border-radius: 14px; }
+    .about-val { font-size: 1.8rem !important; }
+    .about-lbl { font-size: 0.72rem; }
+    .skill-tags { gap: 6px; }
+    .skill-tag { font-size: 0.7rem; padding: 4px 10px; }
+  }
+  @media (max-width: 380px) {
+    .about-cards { grid-template-columns: 1fr; }
+  }
+
+  /* ── Clients section ── */
+  @media (max-width: 600px) {
+    .client-logos-row { gap: 10px !important; padding: 0 0.5rem; }
+    .client-logo-item { width: 62px !important; height: 62px !important; border-radius: 12px !important; }
+    .client-logo-item img { width: 46px !important; height: 46px !important; }
+  }
+  @media (max-width: 380px) {
+    .client-logo-item { width: 54px !important; height: 54px !important; border-radius: 10px !important; }
+    .client-logo-item img { width: 40px !important; height: 40px !important; }
+  }
+
+  /* ── Order form ── */
+  @media (max-width: 600px) {
+    #order { padding: 3rem 1rem !important; }
+    #order .section-in { padding: 1.8rem 1.2rem !important; border-radius: 18px !important; }
+    #order input, #order select, #order textarea {
+      font-size: 16px !important; /* Prevents iOS zoom on focus */
+      padding: 12px 14px !important;
+    }
+    #order label { font-size: 0.8rem; }
+    #order button[type="submit"] { font-size: 0.9rem; padding: 13px; }
+  }
+
+  /* ── Community section ── */
+  @media (max-width: 600px) {
+    #community { padding: 2.5rem 1rem !important; }
+    #community .glass { border-radius: 16px !important; }
+    #community input, #community textarea {
+      font-size: 16px !important; /* Prevents iOS zoom */
+    }
+  }
+
+  /* ── CTA / Call section ── */
+  @media (max-width: 600px) {
+    .call-glass { padding: 2rem 1.2rem; border-radius: 20px; }
+    .call-title { font-size: clamp(1.6rem, 7vw, 2.2rem) !important; }
+    .call-ctas { flex-direction: column; align-items: center; gap: 10px; }
+    .call-ctas a { width: 100%; max-width: 260px; justify-content: center; font-size: 0.88rem; }
+  }
+
+  /* ── Footer ── */
+  @media (max-width: 600px) {
+    footer { padding: 2.5rem 1.2rem 1.5rem; }
+    .foot-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .foot-bot { flex-direction: column; gap: 0.8rem; text-align: center; font-size: 0.75rem; }
+    .foot-logo { font-size: 1.1rem; }
+    .foot-links { gap: 8px; }
+    .foot-links a { font-size: 0.82rem; }
+  }
+
+  /* ── Lightbox mobile ── */
+  @media (max-width: 600px) {
+    #lightbox-overlay { padding: 1rem; }
+    #lightbox-img { max-width: 100%; max-height: 80vh; border-radius: 12px; }
+    #lightbox-close { top: 10px; right: 10px; width: 34px; height: 34px; font-size: 18px; }
+  }
+
+  /* ── Thumbnail section ── */
+  @media (max-width: 600px) {
+    #thumbnails { padding: 3rem 0; }
+    .thumb-container { padding: 0 1rem; }
+    .thumb-grid { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  /* ── Beam/glow hover effects — disable on touch ── */
+  @media (hover: none) {
+    .glass::after, .port-card::after, .srv-card::after,
+    .proc-card::after, .about-card::after, .btn-primary::after {
+      display: none !important;
+    }
+    .port-card:hover, .srv-card:hover, .proc-card:hover {
+      transform: none !important;
+    }
+  }
+
+  /* ── Tap target minimum size ── */
+  @media (max-width: 900px) {
+    a, button, [onclick], .hamburger { min-height: 44px; }
+    .hamburger { min-width: 44px; }
+  }
+
+  /* ── Mobile nav overlay ── */
+  @media (max-width: 600px) {
+    .mobile-nav { padding: 1.5rem 1.2rem; }
+    .mobile-nav a { font-size: 1.4rem; padding: 0.6rem 0; }
+  }
+
+  /* ── Safe area (iPhone notch/home indicator) ── */
+  @supports (padding: env(safe-area-inset-bottom)) {
+    footer { padding-bottom: calc(1.5rem + env(safe-area-inset-bottom)); }
+    nav { padding-top: max(1.1rem, env(safe-area-inset-top)); }
+  }
+
   /* ═══ MOTION GRID & DYNAMIC SECTION GRIDS ═══ */
   .motion-grid {
     display: grid;
@@ -3134,14 +3307,17 @@ async function loadClientLogos() {
       .from('clients').select('id, logo_url').order('created_at', { ascending: true });
     if (error) throw error;
     if (data && data.length > 0) {
-      row.innerHTML = '';
-      data.forEach((client, i) => {
+      // Remove previously appended Supabase logos (avoid duplicates on re-run)
+      row.querySelectorAll('[data-supabase-id]').forEach(el => el.remove());
+      // Append Supabase logos after hardcoded ones
+      data.forEach((client) => {
         const item = document.createElement('div');
         item.className = 'client-logo-item';
         item.title = 'Industry Client';
+        item.setAttribute('data-supabase-id', client.id);
         const img = document.createElement('img');
         img.src = client.logo_url;
-        img.alt = 'Client Logo ' + (i + 1);
+        img.alt = 'Industry Client';
         img.loading = 'lazy';
         img.onerror = function() { this.style.opacity = '0.3'; };
         item.appendChild(img);
