@@ -117,6 +117,38 @@ nav{
 .nav-cta:hover{box-shadow:0 0 32px rgba(139,26,42,0.55);transform:translateY(-1px)}
 .nav-cta svg{width:14px;height:14px;fill:currentColor}
 
+/* ═══ VISITOR COUNTER PILL ═══ */
+.nav-visitor-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--clash);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(245,240,238,0.5);
+  background: rgba(255,255,255,0.04);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  border-radius: 50px;
+  padding: 6px 14px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+.nav-visitor-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #34c759;
+  box-shadow: 0 0 7px rgba(52,199,89,0.9);
+  animation: blink-green 2s ease infinite;
+  flex-shrink: 0;
+}
+.nav-visitor-sep { color: rgba(245,240,238,0.18); }
+#navOnlineCount { color: #34c759; font-weight: 700; font-size: 0.82rem; }
+#navTotalCount  { color: rgba(245,240,238,0.75); font-weight: 700; font-size: 0.82rem; }
+@media (max-width: 900px) { .nav-visitor-pill { display: none !important; } }
+@media (hover: none) and (pointer: coarse) { .nav-visitor-pill { display: none !important; } }
+
 /* ═══ HERO ═══ */
 .hero{
   min-height:100vh;display:flex;align-items:center;
@@ -291,6 +323,7 @@ h1.htitle{
   border:1px solid rgba(139,26,42,0.3);
   border-radius:4px;padding:4px 12px;
   text-transform:uppercase;letter-spacing:2px;margin-bottom:1rem;
+  position:relative;z-index:0;
 }
 .sec-title{
   font-family:var(--clash);
@@ -672,8 +705,16 @@ footer{
     <a href="#motion">Motion</a>
     <a href="#services">Services</a>
     <a href="#about">About</a>
+    <a href="#community">Community</a>
     <a href="#order">Order</a>
     <a href="mailto:shifateditz@gmail.com">Email</a>
+  </div>
+  <div class="nav-visitor-pill" id="navVisitorPill">
+    <span class="nav-visitor-dot"></span>
+    <span id="navOnlineCount">1</span>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(52,199,89,0.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+    <span class="nav-visitor-sep">·</span>
+    <span id="navTotalCount">—</span> <span style="color:rgba(245,240,238,0.45);font-size:0.72rem">Views</span>
   </div>
   <a href="tel:+8801907645156" class="nav-cta">
     <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
@@ -1064,28 +1105,56 @@ footer{
 
   #lightbox-overlay.active img { transform: scale(1); }
 
-  /* ═══ MOBILE HAMBURGER ═══ */
+  /* ═══ MOBILE HAMBURGER — Apple Liquid Glass ═══ */
   .hamburger {
     display: none;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 5px;
     cursor: pointer;
-    padding: 6px;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow:
+      0 2px 8px rgba(0,0,0,0.3),
+      0 0 0 0.5px rgba(255,255,255,0.08) inset,
+      0 1px 0 rgba(255,255,255,0.12) inset;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.23,1,0.32,1);
+  }
+  .hamburger::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hamburger:active {
+    transform: scale(0.93);
+    background: rgba(255,255,255,0.1);
   }
   .hamburger span {
     display: block;
-    width: 22px;
-    height: 2px;
-    background: rgba(245,240,238,0.8);
+    width: 18px;
+    height: 1.5px;
+    background: rgba(245,240,238,0.88);
     border-radius: 2px;
-    transition: all 0.3s ease;
+    transition: all 0.35s cubic-bezier(0.23,1,0.32,1);
+    position: relative;
   }
-  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .hamburger.open span:nth-child(2) { opacity: 0; }
-  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .hamburger span:nth-child(1) { width: 18px; }
+  .hamburger span:nth-child(2) { width: 13px; }
+  .hamburger span:nth-child(3) { width: 18px; }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); width: 18px; }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); width: 18px; }
 
   /* ═══ MOBILE NAV DROPDOWN ═══ */
   .mobile-nav {
@@ -1550,6 +1619,7 @@ footer{
   <a href="#motion" onclick="closeMobileNav()">Motion</a>
   <a href="#services" onclick="closeMobileNav()">Services</a>
   <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#community" onclick="closeMobileNav()">Community</a>
   <a href="#order" onclick="closeMobileNav()">Order</a>
   <a href="mailto:shifateditz@gmail.com" onclick="closeMobileNav()">Email</a>
 </div>
@@ -2093,7 +2163,7 @@ document.getElementById('orderForm').addEventListener('submit',async function(e)
 </div>
 
 <!-- ═══ APPRECIATE & COMMUNITY SECTION ═══ -->
-<div id="community" style="border-top:1px solid rgba(139,26,42,0.12);padding:5rem 3rem;position:relative">
+<div id="community" style="border-top:1px solid rgba(139,26,42,0.12);padding:5rem 3rem;position:relative;z-index:1">
   <div style="max-width:760px;margin:0 auto;position:relative;z-index:2">
 
     <!-- Section Header -->
@@ -3376,6 +3446,162 @@ async function loadSiteSettings() {
 
 document.addEventListener('DOMContentLoaded', () => { loadClientLogos(); loadSiteSettings(); });
 if (document.readyState !== 'loading') { loadClientLogos(); loadSiteSettings(); }
+
+// ═══ VISITOR COUNTER — REAL-TIME ═══
+(function() {
+  const PRESENCE_TABLE  = 'visitor_presence';
+  const SETTINGS_TABLE  = 'site_settings';
+  const SESSION_KEY     = 'sv_sid';
+  const HEARTBEAT_MS    = 15000;   // 15s heartbeat
+  const ONLINE_STALE_S  = 45;      // 45s = considered offline
+
+  let sessionId = null;
+  let heartbeatTimer = null;
+  let realtimeChannel = null;
+  let isTracking = false;
+
+  // ── Animated number update ──
+  function animateTo(el, target) {
+    if (!el) return;
+    const start = parseInt(el.textContent.replace(/,/g,'')) || 0;
+    if (start === target) return;
+    const steps = Math.min(Math.abs(target - start), 20);
+    let step = 0;
+    const t = setInterval(() => {
+      step++;
+      el.textContent = Math.round(start + (target - start) * (step / steps)).toLocaleString();
+      if (step >= steps) clearInterval(t);
+    }, 25);
+  }
+
+  // ── Fetch total visits ──
+  async function fetchTotal() {
+    try {
+      const { data } = await _supabase
+        .from(SETTINGS_TABLE).select('total_visits').eq('id', 1).single();
+      if (data && data.total_visits != null)
+        animateTo(document.getElementById('navTotalCount'), Number(data.total_visits));
+    } catch(e) {}
+  }
+
+  // ── Count online visitors ──
+  async function fetchOnline() {
+    try {
+      const since = new Date(Date.now() - ONLINE_STALE_S * 1000).toISOString();
+      const { data, error } = await _supabase
+        .from(PRESENCE_TABLE)
+        .select('session_id')
+        .gte('last_seen', since);
+      if (!error && data) {
+        const count = data.length;
+        const el = document.getElementById('navOnlineCount');
+        if (el) animateTo(el, count);
+      }
+    } catch(e) {}
+  }
+
+  // ── Heartbeat: upsert session row ──
+  async function heartbeat() {
+    if (!sessionId) return;
+    try {
+      const { error } = await _supabase
+        .from(PRESENCE_TABLE)
+        .upsert(
+          { session_id: sessionId, last_seen: new Date().toISOString(), page: location.pathname },
+          { onConflict: 'session_id' }
+        );
+      if (!error) await fetchOnline(); // refresh count after each heartbeat
+    } catch(e) {}
+  }
+
+  // ── Remove session on tab close ──
+  function removeSession() {
+    if (!sessionId) return;
+    // Use sendBeacon-style fire-and-forget
+    _supabase.from(PRESENCE_TABLE).delete().eq('session_id', sessionId).then(() => {});
+  }
+
+  // ── Real-time via postgres_changes ──
+  function subscribeRealtime() {
+    try {
+      // Unique channel name per tab to avoid conflicts
+      const chName = 'vp-' + Math.random().toString(36).slice(2, 7);
+      realtimeChannel = _supabase
+        .channel(chName)
+        .on('postgres_changes',
+          { event: '*', schema: 'public', table: PRESENCE_TABLE },
+          () => {
+            clearTimeout(subscribeRealtime._t);
+            subscribeRealtime._t = setTimeout(fetchOnline, 200);
+          }
+        )
+        .subscribe((status) => {
+          // If realtime not available, fallback to polling every 10s
+          if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
+            setInterval(fetchOnline, 10000);
+          }
+        });
+    } catch(e) {
+      // Fallback polling
+      setInterval(fetchOnline, 10000);
+    }
+  }
+
+  // ── Main init ──
+  async function initVisitorTracking() {
+    if (isTracking) return;
+    isTracking = true;
+
+    // Generate or restore session ID (per browser tab session)
+    let sid = sessionStorage.getItem(SESSION_KEY);
+    if (!sid) {
+      sid = 'v_' + Date.now() + '_' + Math.random().toString(36).slice(2, 11);
+      sessionStorage.setItem(SESSION_KEY, sid);
+
+      // Increment total_visits only for brand new sessions
+      try {
+        const { data: s } = await _supabase
+          .from(SETTINGS_TABLE).select('total_visits').eq('id', 1).single();
+        const cur = (s && s.total_visits) ? Number(s.total_visits) : 0;
+        await _supabase
+          .from(SETTINGS_TABLE).update({ total_visits: cur + 1 }).eq('id', 1);
+      } catch(e) {}
+    }
+    sessionId = sid;
+
+    // Register presence immediately
+    await heartbeat();
+
+    // Fetch totals
+    await fetchTotal();
+
+    // Start heartbeat loop
+    heartbeatTimer = setInterval(heartbeat, HEARTBEAT_MS);
+
+    // Real-time subscription
+    subscribeRealtime();
+
+    // Tab close cleanup
+    window.addEventListener('beforeunload', removeSession);
+    window.addEventListener('pagehide', removeSession);
+
+    // Pause heartbeat when tab hidden, resume when visible
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        clearInterval(heartbeatTimer);
+      } else {
+        heartbeat();
+        heartbeatTimer = setInterval(heartbeat, HEARTBEAT_MS);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVisitorTracking);
+  } else {
+    initVisitorTracking();
+  }
+})();
 </script>
 </body>
 </html>
