@@ -1,0 +1,41 @@
+{
+  "name": "Shifat Prodhan Admin Dashboard",
+  "short_name": "Shifat Pro",
+  "description": "Admin dashboard for Shifat Pro — manage posts, images, clients & settings.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f5f5f7",
+  "theme_color": "#0071e3",
+  "lang": "en",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "https://lh3.googleusercontent.com/d/1dPbbsHrDWj5ep7VBr1nGuE440i4kIq0m",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://lh3.googleusercontent.com/d/1dPbbsHrDWj5ep7VBr1nGuE440i4kIq0m",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Create Post",
+      "short_name": "New Post",
+      "description": "Go directly to the post creation form",
+      "url": "/?tab=create",
+      "icons": [
+        {
+          "src": "https://lh3.googleusercontent.com/d/1dPbbsHrDWj5ep7VBr1nGuE440i4kIq0m",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
