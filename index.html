@@ -133,7 +133,10 @@ nav{
   animation:fadeUp .8s ease both;
 }
 .bdot{width:5px;height:5px;border-radius:50%;background:var(--wine-bright);animation:blink 2s ease infinite;display:inline-block}
+.bdot.available{background:#34c759;animation:blink-green 2s ease infinite}
+.bdot.unavailable{background:var(--wine-bright);animation:blink 2s ease infinite}
 @keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(139,26,42,0.5)}50%{opacity:0.3;box-shadow:0 0 0 6px rgba(139,26,42,0)}}
+@keyframes blink-green{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,199,89,0.6)}50%{opacity:0.4;box-shadow:0 0 0 6px rgba(52,199,89,0)}}
 h1.htitle{
   font-family:var(--clash);
   font-size:clamp(3.2rem,5.5vw,5.5rem);
@@ -633,7 +636,7 @@ footer{
 
   /* Responsive Fix */
   @media (max-width: 768px) {
-    .nav-links { transform: scale(0.9); }
+    /* nav-links hidden via hamburger at 900px breakpoint */
   }
 
 </style>
@@ -685,11 +688,11 @@ footer{
 <section class="hero">
   <div class="hero-inner">
     <div>
-      <div class="hero-badge"><span class="bdot"></span>Available for Projects</div>
-      <h1 class="htitle">
-        I design things<br>that make you<br><em>stop scrolling.</em>
+      <div class="hero-badge" id="heroBadge"><span class="bdot" id="heroDot"></span><span id="heroAvailText">Available for Projects</span></div>
+      <h1 class="htitle" id="heroTitle">
+        <span id="heroLine1">I design things</span><br><span id="heroLine2">that make you</span><br><em id="heroLineItalic">stop scrolling.</em>
       </h1>
-      <p class="hsub">Hi, I'm Shifat — a visual designer from Dhaka, Bangladesh. I craft scroll-stopping thumbnails, brand identities, and poster designs that speak before the words do.</p>
+      <p class="hsub" id="heroSub">Hi, I'm Shifat — a visual designer from Dhaka, Bangladesh. I craft scroll-stopping thumbnails, brand identities, and poster designs that speak before the words do.</p>
       <div class="hbtns">
         <a href="#work" class="btn-p">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v2H4zm4 5h12v2H8zm5 5h7v2h-7z"/></svg>
@@ -698,9 +701,9 @@ footer{
         
       </div>
       <div class="hero-stats">
-        <div class="stat"><label>Projects Done</label><strong class="gtext">4853+</strong></div>
-        <div class="stat"><label>Happy Clients</label><strong>163</strong></div>
-        <div class="stat"><label>Behance Views</label><strong class="gtext">10K+</strong></div>
+        <div class="stat"><label>Projects Done</label><strong class="gtext" id="statProjects">4853+</strong></div>
+        <div class="stat"><label>Happy Clients</label><strong id="statClients">163</strong></div>
+        <div class="stat"><label>Behance Views</label><strong class="gtext" id="statViews">10K+</strong></div>
       </div>
     </div>
 
@@ -1140,10 +1143,6 @@ footer{
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
     .about-vis { display: none; }
     .thumb-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-    #motionGrid { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
-    .foot-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    .call-glass { padding: 3rem 2rem; }
-    .call-title { font-size: clamp(2rem,6vw,3rem); }
     footer { padding: 3rem 1.5rem 2rem; }
   }
 
@@ -1155,7 +1154,6 @@ footer{
     .port-grid { grid-template-columns: 1fr; }
     .proc-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     .thumb-grid { grid-template-columns: 1fr; gap: 14px; }
-    #motionGrid { grid-template-columns: 1fr !important; }
     .foot-grid { grid-template-columns: 1fr; gap: 1.5rem; }
     .foot-bot { flex-direction: column; gap: 1rem; text-align: center; }
     .about-cards { grid-template-columns: 1fr 1fr; }
@@ -1173,6 +1171,132 @@ footer{
     h1.htitle { font-size: 2rem; }
     .proc-grid { grid-template-columns: 1fr; }
     .about-cards { grid-template-columns: 1fr; }
+  }
+
+  /* ═══ RESPONSIVE FIXES — CHIPS (hero visual hidden on mobile, but chips can overflow on small PC) ═══ */
+  @media (max-width: 1100px) and (min-width: 901px) {
+    .chip-1 { left: -6%; }
+    .chip-2 { right: -5%; }
+    .chip-3 { left: -8%; }
+    .hero-inner { gap: 2.5rem; }
+  }
+
+  /* ═══ CLIENTS SECTION FONT FIX ═══ */
+  .clients-container h2 {
+    font-size: clamp(2.2rem, 6vw, 5rem) !important;
+    line-height: 1.1;
+  }
+  .clients-container p {
+    font-size: clamp(0.95rem, 2.5vw, 2rem) !important;
+    line-height: 1.6;
+  }
+  @media (max-width: 900px) {
+    .clients-container { padding-top: 60px !important; padding-bottom: 60px !important; }
+    .clients-container h2 { font-size: clamp(2rem, 7vw, 3.5rem) !important; margin-bottom: 6px !important; }
+    .clients-container p { font-size: clamp(0.88rem, 3vw, 1.2rem) !important; margin-bottom: 24px !important; }
+    .client-logos-row { gap: 16px !important; }
+  }
+  @media (max-width: 600px) {
+    .clients-container { padding: 40px 1.2rem !important; }
+    .clients-container h2 { font-size: 1.9rem !important; }
+    .clients-container p { font-size: 0.88rem !important; }
+    .client-logos-row { gap: 12px !important; max-width: 100% !important; }
+  }
+
+  /* ═══ ORDER SECTION MOBILE ═══ */
+  @media (max-width: 900px) {
+    #order { padding: 4rem 1.5rem !important; }
+    #order .section-in { padding: 2.5rem 2rem !important; }
+  }
+  @media (max-width: 600px) {
+    #order { padding: 3rem 1rem !important; }
+    #order .section-in { padding: 2rem 1.2rem !important; }
+    #order .section-in form > div:first-child { grid-template-columns: 1fr !important; }
+  }
+
+  /* ═══ COMMUNITY SECTION MOBILE ═══ */
+  @media (max-width: 900px) {
+    #community { padding: 3.5rem 1.5rem !important; }
+    #community .glass { padding: 1.5rem 1.5rem !important; }
+  }
+  @media (max-width: 600px) {
+    #community { padding: 2.5rem 1rem !important; }
+    #community .glass { padding: 1.2rem 1rem !important; }
+    #community [style*="grid-template-columns:1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+    .react-pill { padding: 8px 14px; font-size: 0.82rem; }
+  }
+
+  /* ═══ DYNAMIC SECTIONS (Supabase categories) MOBILE ═══ */
+  @media (max-width: 900px) {
+    [id^="dyn-"] [style*="grid-template-columns:repeat(3"] ,
+    [id^="dyn-"] [style*="grid-template-columns: repeat(3"] {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 12px !important;
+    }
+    [id^="dyn-"] [style*="grid-template-columns:repeat(2"] ,
+    [id^="dyn-"] [style*="grid-template-columns: repeat(2"] {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 12px !important;
+    }
+  }
+  @media (max-width: 600px) {
+    [id^="dyn-"] [id$="-grid"] {
+      grid-template-columns: 1fr !important;
+      gap: 14px !important;
+    }
+  }
+
+  /* ═══ NAV LOGO OVERFLOW FIX on very small screens ═══ */
+  @media (max-width: 360px) {
+    .nav-brand { font-size: 1rem; }
+    nav { padding: 0.8rem 1rem; }
+  }
+
+  /* ═══ FOOTER MOBILE FIX ═══ */
+  @media (max-width: 900px) {
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .foot-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+    footer { padding: 2.5rem 1.2rem 1.5rem; }
+  }
+
+  /* ═══ PROCESS GRID PC FIX (4 cols is too tight at 900-1100px) ═══ */
+  @media (max-width: 1080px) and (min-width: 901px) {
+    .proc-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  }
+
+  /* ═══ MOBILE NAV TOUCH CURSOR FIX ═══ */
+  @media (hover: none) and (pointer: coarse) {
+    .hamburger { cursor: pointer !important; }
+    .mobile-nav a { cursor: pointer !important; }
+    a, button, [onclick] { cursor: pointer !important; }
+    body { cursor: auto !important; }
+  }
+
+  /* ═══ SAFE OVERFLOW FIX ═══ */
+  body { overflow-x: hidden; }
+  #app { overflow-x: hidden; }
+
+  /* ═══ MOTION GRID & DYNAMIC SECTION GRIDS ═══ */
+  .motion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 3rem;
+  }
+  .dyn-grid {
+    max-width: 100%;
+  }
+  @media (max-width: 900px) {
+    .motion-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+    .dyn-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+  }
+  @media (max-width: 600px) {
+    .motion-grid { grid-template-columns: 1fr !important; }
+    .dyn-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
   }
 
   /* ═══ RECENT WORK IMAGE CARD TEXT OVERLAY (like reference image) ═══ */
@@ -1496,7 +1620,7 @@ fetchWorks = async function() {
         <h2 class="sec-title">Motion <em>Work</em></h2>
         <p style="color:rgba(255,255,255,0.38);font-size:0.9rem;max-width:460px;margin-bottom:0.5rem">Visual stories that don't just stop thumbs — they move people.</p>
         <div class="shimmer"></div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:3rem" id="motionGrid">
+        <div class="motion-grid" id="motionGrid">
           <!-- Static entries -->
           <a href="https://drive.google.com/file/d/1WnQ9nKktoiIaWr54I1_po626JazPDaN_/view" target="_blank" class="glass port-card" style="text-decoration:none;border-radius:20px;display:block">
             <div style="width:100%;position:relative;padding-bottom:56.25%;overflow:hidden;border-radius:16px 16px 0 0;background:linear-gradient(135deg,#1a0505,#2d0a0a)">
@@ -1626,7 +1750,7 @@ fetchWorks = async function() {
   }
   </style>
 
-  <div class="client-logos-row">
+  <div class="client-logos-row" id="clientLogosRow">
     <div class="client-logo-item" title="Industry Client">
       <img src="https://lh3.googleusercontent.com/d/1rHcgDHn4nirwIRyCuFsyKdev1Ujf1wAR" alt="Client Logo 1" loading="lazy" onerror="this.style.opacity='0.3'">
     </div>
@@ -1648,6 +1772,9 @@ fetchWorks = async function() {
     <div class="client-logo-item" title="Industry Client">
       <img src="https://lh3.googleusercontent.com/d/1K-_rVl_E3hNfSZDTjf9Z0pcurykY11i0" alt="Client Logo 7" loading="lazy" onerror="this.style.opacity='0.3'">
     </div>
+    <div class="client-logo-item" title="Industry Client">
+      <img src="https://lh3.googleusercontent.com/d/1dAx21yt0YTI4IQTkq0NYMOMlkOk-JC-e" alt="Client Logo 8" loading="lazy" onerror="this.style.opacity='0.3'">
+    </div>
   </div>
  </div>
   
@@ -1662,10 +1789,10 @@ fetchWorks = async function() {
             <h2 class="about-copy">Design that stops thumbs &amp; starts <em>conversations.</em></h2>
             <p class="about-text">I'm Shifat — a visual designer from Dhaka, Bangladesh obsessed with the intersection of art, psychology, and storytelling. Every pixel is intentional. Every composition is built to make people feel something before they even read the words.<br><br>I work directly with content creators, brands, and businesses who want design that actually performs.</p>
             <div class="about-cards">
-              <div class="glass about-card"><div class="about-val gtext">4853+</div><div class="about-lbl">Projects Completed</div></div>
-              <div class="glass about-card"><div class="about-val">163</div><div class="about-lbl">Happy Clients</div></div>
+              <div class="glass about-card"><div class="about-val gtext" id="aboutStatProjects">4853+</div><div class="about-lbl">Projects Completed</div></div>
+              <div class="glass about-card"><div class="about-val" id="aboutStatClients">163</div><div class="about-lbl">Happy Clients</div></div>
               <div class="glass about-card"><div class="about-val gtext">4+</div><div class="about-lbl">Years Experience</div></div>
-              <div class="glass about-card"><div class="about-val">10K+</div><div class="about-lbl">Behance Views</div></div>
+              <div class="glass about-card"><div class="about-val" id="aboutStatViews">10K+</div><div class="about-lbl">Behance Views</div></div>
             </div>
           </div>
           <div class="about-vis">
@@ -2883,7 +3010,7 @@ function buildDynamicSection(category, posts) {
           <h2 class="sec-title">${cfg.headline} <em>${cfg.headlineItalic}</em></h2>
           <p style="color:rgba(255,255,255,0.38);font-size:0.9rem;max-width:480px;margin-bottom:0.5rem;text-align:center;margin-left:auto;margin-right:auto">${cfg.sub}</p>
           <div class="shimmer"></div>
-          <div id="${anchorId}-grid" style="display:grid;grid-template-columns:repeat(${cfg.isVideo ? 3 : 2},1fr);gap:${cfg.isVideo ? 16 : 20}px;margin-top:2.5rem"></div>
+          <div id="${anchorId}-grid" class="dyn-grid" style="display:grid;grid-template-columns:repeat(${cfg.isVideo ? 3 : 2},1fr);gap:${cfg.isVideo ? 16 : 20}px;margin-top:2.5rem"></div>
         </div>
       </div>
     </div>
@@ -2997,6 +3124,82 @@ if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
   if (ring) ring.style.display = 'none';
   if (canvas) canvas.style.display = 'none';
 }
+
+// ═══ SUPABASE: Load client logos ═══
+async function loadClientLogos() {
+  const row = document.getElementById('clientLogosRow');
+  if (!row) return;
+  try {
+    const { data, error } = await _supabase
+      .from('clients').select('id, logo_url').order('created_at', { ascending: true });
+    if (error) throw error;
+    if (data && data.length > 0) {
+      row.innerHTML = '';
+      data.forEach((client, i) => {
+        const item = document.createElement('div');
+        item.className = 'client-logo-item';
+        item.title = 'Industry Client';
+        const img = document.createElement('img');
+        img.src = client.logo_url;
+        img.alt = 'Client Logo ' + (i + 1);
+        img.loading = 'lazy';
+        img.onerror = function() { this.style.opacity = '0.3'; };
+        item.appendChild(img);
+        row.appendChild(item);
+      });
+    }
+  } catch (err) { console.log('Clients load skipped:', err.message); }
+}
+
+// ═══ SUPABASE: Load site settings ═══
+async function loadSiteSettings() {
+  try {
+    const { data, error } = await _supabase
+      .from('site_settings').select('*').eq('id', 1).single();
+    if (error) throw error;
+    if (!data) return;
+
+    const el = (id) => document.getElementById(id);
+
+    // Hero title
+    if (el('heroLine1')      && data.hero_title_line1)  el('heroLine1').textContent      = data.hero_title_line1;
+    if (el('heroLine2')      && data.hero_title_line2)  el('heroLine2').textContent      = data.hero_title_line2;
+    if (el('heroLineItalic') && data.hero_title_italic) el('heroLineItalic').textContent = data.hero_title_italic;
+    if (el('heroSub')        && data.hero_sub)          el('heroSub').textContent        = data.hero_sub;
+
+    // Available badge — dot color changes green ↔ red
+    const dot = el('heroDot');
+    const badge = el('heroBadge');
+    const availText = el('heroAvailText');
+    if (dot && badge) {
+      if (data.available === false) {
+        // Unavailable — red dot, change text
+        dot.classList.remove('available');
+        dot.classList.add('unavailable');
+        if (availText) availText.textContent = 'Not Available';
+      } else {
+        // Available — green dot
+        dot.classList.remove('unavailable');
+        dot.classList.add('available');
+        if (availText) availText.textContent = 'Available for Projects';
+      }
+    }
+
+    // Hero stats
+    if (el('statProjects') && data.stat_projects) el('statProjects').textContent = data.stat_projects;
+    if (el('statClients')  && data.stat_clients)  el('statClients').textContent  = data.stat_clients;
+    if (el('statViews')    && data.stat_views)    el('statViews').textContent    = data.stat_views;
+
+    // About section stats
+    if (el('aboutStatProjects') && data.stat_projects) el('aboutStatProjects').textContent = data.stat_projects;
+    if (el('aboutStatClients')  && data.stat_clients)  el('aboutStatClients').textContent  = data.stat_clients;
+    if (el('aboutStatViews')    && data.stat_views)    el('aboutStatViews').textContent    = data.stat_views;
+
+  } catch (err) { console.log('Settings load skipped:', err.message); }
+}
+
+document.addEventListener('DOMContentLoaded', () => { loadClientLogos(); loadSiteSettings(); });
+if (document.readyState !== 'loading') { loadClientLogos(); loadSiteSettings(); }
 </script>
 </body>
 </html>
