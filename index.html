@@ -3514,8 +3514,11 @@ async function fetchWorks() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', fetchWorks);
-if (document.readyState !== 'loading') fetchWorks();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', fetchWorks);
+} else {
+  fetchWorks();
+}
 
 // ═══ HAMBURGER NAV ═══
 function toggleMobileNav() {
@@ -3629,8 +3632,12 @@ async function loadSiteSettings() {
   } catch (err) { console.log('Settings load skipped:', err.message); }
 }
 
-document.addEventListener('DOMContentLoaded', () => { loadClientLogos(); loadSiteSettings(); });
-if (document.readyState !== 'loading') { loadClientLogos(); loadSiteSettings(); }
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => { loadClientLogos(); loadSiteSettings(); });
+} else {
+  loadClientLogos();
+  loadSiteSettings();
+}
 
 // ═══ VISITOR COUNTER — REAL-TIME ═══
 (function() {
